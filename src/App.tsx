@@ -22,6 +22,7 @@ const ipfs = create({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' })
   Web3 modal helps us "connect" external wallets:
 */
 const web3Modal = new Web3Modal({
+  theme: "dark",
   // network: "mainnet", // optional
   cacheProvider: true, // optional
   providerOptions: {
@@ -85,7 +86,7 @@ function App() {
   const mainnetProvider = mainnetInfura;
   const localProvider = new StaticJsonRpcProvider(localProviderUrlFromEnv);
 
-  const [injectedProvider, setInjectedProvider] = useState();
+  const [injectedProvider, setInjectedProvider] = useState<Web3Provider>();
 
   // Use your injected provider from 🦊 Metamask or
   // if you don't have it then instantly generate a 🔥 burner wallet.
@@ -100,9 +101,7 @@ function App() {
   //
   useEffect(() => {
     if (
-      DEBUG &&
-      mainnetProvider &&
-      selectedChainId
+      DEBUG
     ) {
       console.log('_____________________________________ 🏗 NFM-Project _____________________________________');
       console.log('🌎 mainnetProvider', mainnetProvider);
@@ -115,14 +114,16 @@ function App() {
   ]);
 
   const loadWeb3Modal = useCallback(async () => {
+    console.log("inside loadweb3")
     const provider = await web3Modal.connect();
     setInjectedProvider(new Web3Provider(provider));
   }, [setInjectedProvider]);
 
   useEffect(() => {
-    if (web3Modal.cachedProvider) {
+    console.log("I am here", web3Modal)
+    // if (web3Modal.cachedProvider) {
       loadWeb3Modal();
-    }
+    // }
   }, [loadWeb3Modal]);
 
 

@@ -12,30 +12,42 @@ export const BLOCKNATIVE_DAPPID = '';
 
 export const DAI_ADDRESS = '';
 
-export const NETWORK = (chainId: any) => {
-  for (const n in NETWORKS) {
+interface network {
+  name: string;
+  color: string;
+  chainId: number;
+  blockExplorer: string;
+  rpcUrl: string;
+  faucet?: string;
+  price?:number;
+  gasPrice?:number;
+}
+
+
+export const NETWORK : ( (chainId : number) => network | undefined)  = (chainId: number) => {
+  for (let n in NETWORKS) {
     if (NETWORKS[n].chainId === chainId) {
       return NETWORKS[n];
     }
   }
 };
 
-export const NETWORKS = {
-  localhost: {
+export const NETWORKS : {[key : string] : network} = {
+  "localhost": {
     name: 'localhost',
     color: '#666666',
     chainId: 31337,
     blockExplorer: '',
     rpcUrl: 'http://' + window.location.hostname + ':8545',
   },
-  mainnet: {
+  "mainnet": {
     name: 'mainnet',
     color: '#ff8b9e',
     chainId: 1,
     rpcUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`,
     blockExplorer: 'https://etherscan.io/',
   },
-  kovan: {
+  "kovan": {
     name: 'kovan',
     color: '#7003DD',
     chainId: 42,
@@ -43,7 +55,7 @@ export const NETWORKS = {
     blockExplorer: 'https://kovan.etherscan.io/',
     faucet: 'https://gitter.im/kovan-testnet/faucet', // https://faucet.kovan.network/
   },
-  rinkeby: {
+  "rinkeby": {
     name: 'rinkeby',
     color: '#e0d068',
     chainId: 4,
@@ -51,7 +63,7 @@ export const NETWORKS = {
     faucet: 'https://faucet.rinkeby.io/',
     blockExplorer: 'https://rinkeby.etherscan.io/',
   },
-  ropsten: {
+  "ropsten": {
     name: 'ropsten',
     color: '#F60D09',
     chainId: 3,
@@ -59,7 +71,7 @@ export const NETWORKS = {
     blockExplorer: 'https://ropsten.etherscan.io/',
     rpcUrl: `https://ropsten.infura.io/v3/${INFURA_ID}`,
   },
-  goerli: {
+  "goerli": {
     name: 'goerli',
     color: '#0975F6',
     chainId: 5,
@@ -67,7 +79,7 @@ export const NETWORKS = {
     blockExplorer: 'https://goerli.etherscan.io/',
     rpcUrl: `https://goerli.infura.io/v3/${INFURA_ID}`,
   },
-  xdai: {
+  "xdai": {
     name: 'xdai',
     color: '#48a9a6',
     chainId: 100,
@@ -77,7 +89,7 @@ export const NETWORKS = {
     faucet: 'https://xdai-faucet.top/',
     blockExplorer: 'https://blockscout.com/poa/xdai/',
   },
-  matic: {
+  "matic": {
     name: 'matic',
     color: '#2bbdf7',
     chainId: 137,
@@ -87,7 +99,7 @@ export const NETWORKS = {
     faucet: 'https://faucet.matic.network/',
     blockExplorer: 'https://explorer-mainnet.maticvigil.com//',
   },
-  mumbai: {
+  "mumbai": {
     name: 'mumbai',
     color: '#92D9FA',
     chainId: 80001,

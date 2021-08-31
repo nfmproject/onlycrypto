@@ -1,5 +1,4 @@
 import { Web3Provider } from '@ethersproject/providers';
-import BurnerProvider from 'burner-provider';
 import { useMemo } from 'react';
 import { INFURA_ID } from '../constants';
 
@@ -28,7 +27,6 @@ const useUserProvider = (injectedProvider: any, localProvider: any) => useMemo((
   }
   if (!localProvider) return undefined;
 
-  const burnerConfig = {};
 
   if (window.location.pathname) {
     if (window.location.pathname.indexOf('/pk') >= 0) {
@@ -37,7 +35,6 @@ const useUserProvider = (injectedProvider: any, localProvider: any) => useMemo((
       if (incomingPK.length === 64 || incomingPK.length === 66) {
         console.log('🔑 Incoming Private Key...');
         rawPK = incomingPK;
-        burnerConfig.privateKey = rawPK;
         window.history.pushState({}, '', '/');
         const currentPrivateKey = window.localStorage.getItem('metaPrivateKey');
         if (currentPrivateKey && currentPrivateKey !== rawPK) {
@@ -48,15 +45,6 @@ const useUserProvider = (injectedProvider: any, localProvider: any) => useMemo((
     }
   }
 
-  console.log('🔥 Using burner provider', burnerConfig);
-  if (localProvider.connection && localProvider.connection.url) {
-    burnerConfig.rpcUrl = localProvider.connection.url;
-    return new Web3Provider(new BurnerProvider(burnerConfig));
-  }
-  // eslint-disable-next-line no-underscore-dangle
-  const networkName = localProvider._network && localProvider._network.name;
-  burnerConfig.rpcUrl = `https://${networkName || 'mainnet'}.infura.io/v3/${INFURA_ID}`;
-  return new Web3Provider(new BurnerProvider(burnerConfig));
 }, [injectedProvider, localProvider]);
 
 export default useUserProvider;
