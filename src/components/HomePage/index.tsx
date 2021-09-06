@@ -26,17 +26,14 @@ const HomePage: React.FC = () => {
         <Form>
           <TweetBoxInput>
             <TweetBoxInputInput>
-              <input type="text" placeholder="What's happening?" />
+              <textarea placeholder="What's happening?" />
             </TweetBoxInputInput>
           </TweetBoxInput>
         </Form>
-      </TweetBox>
-
-      <ProfileData>
-
-
+        <ProfileData>
         <EditButton>Post</EditButton>
       </ProfileData>
+      </TweetBox>
 
       <Feed />
     </Container>

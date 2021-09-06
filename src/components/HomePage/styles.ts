@@ -150,11 +150,13 @@ export const TweetBox = styled.div`
   padding-bottom: 10px;
   border-bottom: 8px solid var(--twitter-background);
   padding-right: 10px;
+  width: 100%;
 `;
 
 export const TweetBoxInput = styled.div`
   border-radius: 50%;
   height: 100%;
+  width: 100%;
 `;
 
 
@@ -174,6 +176,7 @@ export const TweetBoxInputInput = styled.div`
   font-size: 20px;
   border: none;
   outline: none;
+  width: 100%;
 `;
 
 export const TweetBoxButton = styled.div`
