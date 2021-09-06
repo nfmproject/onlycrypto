@@ -26,7 +26,7 @@ const ProfilePage: React.FC = () => {
       </Banner>
 
       <ProfileData>
-        <EditButton outlined>Set up profile</EditButton>
+        <EditButton outlined>Edit profile</EditButton>
 
         <h1>Elton Lazzarin</h1>
         <h2>@elton_lazzarin</h2>
@@ -44,13 +44,13 @@ const ProfilePage: React.FC = () => {
             <LocationIcon />
             São José do Rio Preto, Brazil
           </li>
-          <li>
+          {/* <li>
             <CakeIcon />
             Born on May 13, 1989
-          </li>
+          </li> */}
         </ul>
 
-        <Followage>
+        {/* <Followage>
           <span>
             <strong>98 </strong>
             Following
@@ -58,7 +58,7 @@ const ProfilePage: React.FC = () => {
           <span>
             <strong>322 </strong>Followers
           </span>
-        </Followage>
+        </Followage> */}
       </ProfileData>
 
       <Feed />
