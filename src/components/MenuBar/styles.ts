@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import logo from '../../assets/logo.png';
+
 import {
   Home,
   Notifications,
@@ -41,13 +43,12 @@ export const Topside = styled.div`
   }
 `;
 
-export const Logo = styled(Twitter)`
+export const Logo = styled.div`
   width: 32px;
   height: 32px;
 
-  > path {
-    fill: var(--twitter);
-  }
+  background-image: url(${logo});
+  background-size: cover;
 
   margin-bottom: 20px;
 `;

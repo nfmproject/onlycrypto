@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ProfilePage from '../ProfilePage';
+import HomePage from '../HomePage';
 
 import {
   Container,
@@ -14,21 +14,17 @@ import {
   EmailIcon,
 } from './styles';
 
-const Main: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <Container>
       <Header>
-        <button>
-          <BackIcon />
-        </button>
 
         <ProfileInfo>
-          <strong>Elton Lazzarin</strong>
-          <span>432 Posts</span>
+          <strong>Home</strong>
         </ProfileInfo>
       </Header>
 
-      <ProfilePage />
+      <HomePage />
 
       <BottomMenu>
         <HomeIcon className="active" />
@@ -40,4 +36,4 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default Home;

@@ -62,7 +62,7 @@ const MenuBar: React.FC = () => {
         </MenuButton>
 
         <Button>
-          <span>Tweet</span>
+          <span>Post</span>
         </Button>
       </Topside>
 
