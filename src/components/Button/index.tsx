@@ -24,4 +24,10 @@ export default styled.button<Props>`
         ? 'var(--twitter-dark-hover)'
         : 'var(--twitter-hover-light)'};
   }
+  &:disabled {
+    background: ${(props) =>
+      props.outlined
+        ? 'var(--twitter-dark-hover)'
+        : 'var(--twitter-hover-light)'};
+  }
 `;

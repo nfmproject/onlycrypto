@@ -16,14 +16,14 @@
     "@types/react-dom": "^16.9.0",
     "@walletconnect/web3-provider": "^1.6.5",
     "burner-provider": "^1.0.38",
-    "ipfs-http-client": "^52.0.2",
+    "ipfs-http-client": "^52.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-sticky-box": "^0.9.3",
     "styled-components": "^5.1.1",
     "styled-icons": "^10.6.0",
-    "typescript": "~3.7.2",
+    "urlcat": "^2.0.4",
     "web3modal": "^1.9.4"
   },
   "scripts": {
@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.1"
+    "@types/styled-components": "^5.1.1",
+    "typescript": "^3.9.10"
   }
 }
