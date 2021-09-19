@@ -6,7 +6,7 @@ const ThreeIdResolver = require('@ceramicnetwork/3id-did-resolver').default
 const KeyDidResolver = require('key-did-resolver').default
 const { Resolver } = require('did-resolver')
 const { DID } = require('dids')
-const fromString = require('uint8arrays/from-string')
+const {fromString} = require('uint8arrays/from-string')
 
 const CERAMIC_URL = 'http://localhost:7007'
 
@@ -39,17 +39,67 @@ const UserSchema = {
   },
 }
 
-const NotesListSchema = {
+// unlockLocks: {
+//   type: 'array',
+//   title: 'unlocks',
+//   items: {
+//     type: 'object',
+//     title: 'UnlockItems',
+//     properties: {
+//       unlockAddress: {
+//         type: 'string',
+//         title: 'address',
+//         maxLength: 200,
+//       },
+//       chainId: {
+//         type: 'integer',
+//         minimum: 0,
+//       }
+//     },
+//   },
+// }
+
+const PostSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
-  title: 'NotesList',
+  title: 'Post',
   type: 'object',
   properties: {
-    notes: {
+    encContent: {
+      type: 'string',
+      title: 'text',
+      maxLength: 4000,
+    },
+    id: {
+      type: 'string',
+      title: 'text',
+      maxLength: 4000,
+    },
+    unlockLocks: {
+      type: 'string',
+      title: 'text',
+      maxLength: 4000,
+    }
+  },
+  definitions: {
+    CeramicStreamId: {
+      type: 'string',
+      pattern: '^ceramic://.+(\\\\?version=.+)?',
+      maxLength: 150,
+    },
+  },
+}
+
+const PostsListSchema = {
+  $schema: 'http://json-schema.org/draft-07/schema#',
+  title: 'PostsList',
+  type: 'object',
+  properties: {
+    posts: {
       type: 'array',
-      title: 'notes',
+      title: 'posts',
       items: {
         type: 'object',
-        title: 'NoteItem',
+        title: 'PostItem',
         properties: {
           id: {
             $ref: '#/definitions/CeramicStreamId',
@@ -73,8 +123,8 @@ const NotesListSchema = {
 }
 
 async function run() {
-  // The seed must be provided as an environment variable
-  const seed = fromString(process.env.SEED, 'base16')
+  // The seed must be provided as an environment variable   // process.env.SEED
+  const seed = fromString("56df6a0653cb0c8796b9ed3f3597e379c0e3bdd8112dcf15512cc5a2607794b8", 'base16')
   // Connect to the local Ceramic node
   const ceramic = new Ceramic(CERAMIC_URL)
   // Provide the DID Resolver and Provider to Ceramic
@@ -90,26 +140,36 @@ async function run() {
 
 
   // Publish the two schemas
-  const [noteSchema, notesListSchema] = await Promise.all([
-    publishSchema(ceramic, { content: NoteSchema }),
-    publishSchema(ceramic, { content: NotesListSchema }),
+  const [userSchema, postSchema, postsListSchema] = await Promise.all([
+    publishSchema(ceramic, { content: UserSchema }),
+    publishSchema(ceramic, { content: PostSchema }),
+    publishSchema(ceramic, { content: PostsListSchema }),
   ])
 
   // Create the definition using the created schema ID
-  const notesDefinition = await createDefinition(ceramic, {
-    name: 'notes',
-    description: 'Simple text notes',
-    schema: notesListSchema.commitId.toUrl(),
+  const userDefination = await createDefinition(ceramic, {
+    name: 'user',
+    description: 'simple user info',
+    schema: userSchema.commitId.toUrl(),
+  })
+
+  // Create the definition using the created schema ID
+  const postDefination = await createDefinition(ceramic, {
+    name: 'post',
+    description: 'post info',
+    schema: postSchema.commitId.toUrl(),
   })
 
   // Write config to JSON file
   const config = {
     definitions: {
-      notes: notesDefinition.id.toString(),
+      users: userDefination.id.toString(),
+      post: postDefination.id.toString(),
     },
     schemas: {
-      Note: noteSchema.commitId.toUrl(),
-      NotesList: notesListSchema.commitId.toUrl(),
+      User: userSchema.commitId.toUrl(),
+      Post: postSchema.commitId.toUrl(),
+      PostsListSchema: postsListSchema.commitId.toUrl(),
     },
   }
   await writeFile('./src/config.json', JSON.stringify(config))
