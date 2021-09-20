@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Web3Modal from 'web3modal';   
+import Web3Modal from 'web3modal';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Torus from "@toruslabs/torus-embed";
 import Portis from "@portis/web3";
@@ -10,13 +10,58 @@ import GlobalStyles from './styles/GlobalStyles';
 import { useUserProvider } from './hooks';
 
 import { INFURA_ID, NETWORKS, NETWORK } from './constants';
+import { AuthState, useApp } from './state';
+import { Button, TextField, Typography } from '@material-ui/core';
+import { fromString } from 'uint8arrays';
+import { randomBytes } from '@stablelib/random'
 
 
 
-// https://www.npmjs.com/package/ipfs-http-client
-const { create } = require('ipfs-http-client');
+type AuthenticateProps = {
+  authenticate: (seed: Uint8Array) => void
+  state: AuthState
+}
 
-const ipfs = create({ host: 'ipfs.infura.io', port: '5001', protocol: 'https' });
+function AuthenticateScreen({ authenticate, state }: AuthenticateProps) {
+  const [seed, setSeed] = useState('2fb8d63fe0697b8086c94cf05728b06b60af9e68cac5c48d616de7498371a125')
+  const isLoading = state.status === 'loading'
+
+  return state.status === 'done' ? (
+    <Typography>Authenticated with ID {state.idx.id}</Typography>
+  ) : (
+    <>
+      <Typography>
+        You need to authenticate to load your existing notes and create new
+        ones.
+      </Typography>
+      <div>
+        <TextField
+          autoFocus
+          disabled={isLoading}
+          fullWidth
+          id="seed"
+          label="Seed"
+          onChange={(event) => setSeed(event.target.value)}
+          placeholder="base16-encoded string of 32 bytes length"
+          type="text"
+          value={seed}
+        />
+      </div>
+      <Button
+        color="primary"
+        disabled={seed === '' || isLoading}
+        onClick={() => authenticate(fromString(seed, 'base16'))}
+        variant="contained">
+        Authenticate
+      </Button>
+    </>
+  )
+}
+
+
+
+
+
 
 /*
   Web3 modal helps us "connect" external wallets:
@@ -83,6 +128,7 @@ if (DEBUG) console.log('🏠 Connecting to provider:', localProviderUrlFromEnv);
 
 
 function App() {
+  const app = useApp()
   const mainnetProvider = mainnetInfura;
   const localProvider = new StaticJsonRpcProvider(localProviderUrlFromEnv);
 
@@ -122,13 +168,16 @@ function App() {
   useEffect(() => {
     console.log("I am here", web3Modal)
     // if (web3Modal.cachedProvider) {
-      loadWeb3Modal();
+    loadWeb3Modal();
     // }
   }, [loadWeb3Modal]);
 
 
   return (
     <>
+      <AuthenticateScreen
+        authenticate={app.authenticate}
+        state={app.state.auth} />
       <Layout />
       <GlobalStyles />
     </>

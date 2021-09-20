@@ -254,6 +254,11 @@ type Action =
       )
     }, [])
 
-
+    return {
+      authenticate,
+      savePost,
+      openPost,
+      state,
+    }
 
   }

@@ -9,7 +9,7 @@ import { DID } from 'dids';
 import { definitions } from './config.json'
 import internal from 'stream';
 
-const CERAMIC_URL = 'http://localhost:7007'
+const CERAMIC_URL = 'https://ceramic-clay.3boxlabs.com'
 
 export type UserItem = {
   id: string

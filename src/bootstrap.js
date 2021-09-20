@@ -8,7 +8,7 @@ const { Resolver } = require('did-resolver')
 const { DID } = require('dids')
 const {fromString} = require('uint8arrays/from-string')
 
-const CERAMIC_URL = 'http://localhost:7007'
+const CERAMIC_URL = 'https://ceramic-clay.3boxlabs.com'
 
 const UserSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
