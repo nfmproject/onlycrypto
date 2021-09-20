@@ -1,7 +1,7 @@
 import type { TileDocument } from '@ceramicnetwork/stream-tile'
 import type Ceramic from '@ceramicnetwork/http-client'
 import type { IDX } from '@ceramicstudio/idx'
-import { useCallback, useReducer } from 'react'
+import { useCallback, useReducer, useState } from 'react'
 
 import { schemas } from './config.json'
 import { getIDX } from './idx'
@@ -194,4 +194,66 @@ type Action =
         }
       }
     }
+  }
+
+
+  export function useApp() {
+    const [state, dispatch] = useReducer( reducer,{
+      auth: { status: 'pending' },
+      draftStatus: 'unsaved',
+      nav: { type: 'default' },
+      posts: {}
+    })
+
+    const authenticate = useCallback((seed: Uint8Array) => {
+      dispatch({ type: 'auth', status: 'loading' })
+      getIDX(seed).then(
+        (init) => {
+          dispatch({ type: 'auth success', ...init })
+        },
+        (err) => {
+          console.warn('authenticate call failed', err)
+          dispatch({ type: 'auth', status: 'failed' })
+        },
+      )
+    }, [])
+  
+    const openPost = useCallback(
+      (streamID: string) => {
+        dispatch({ type: 'nav post', streamID })
+  
+        if (state.posts[streamID] == null || state.posts[streamID].status === 'init') {
+          const { ceramic } = state.auth as AuthenticatedState
+          ceramic.loadStream<TileDocument>(streamID).then(
+            (doc) => {
+              dispatch({ type: 'post loaded', streamID, doc })
+            },
+            () => {
+              dispatch({
+                type: 'post loading status',
+                streamID,
+                status: 'loading failed',
+              })
+            },
+          )
+        }
+      },
+      [state.auth, state.posts],
+    )
+
+    const savePost = useCallback((doc: TileDocument, text: string) => {
+      const streamID = doc.id.toString()
+      dispatch({ type: 'post saving status', streamID, status: 'saving' })
+      doc.update({ date: new Date().toISOString(), text }).then(
+        () => {
+          dispatch({ type: 'post saving status', streamID, status: 'saved' })
+        },
+        () => {
+          dispatch({ type: 'post saving status', streamID, status: 'saving failed' })
+        },
+      )
+    }, [])
+
+
+
   }
