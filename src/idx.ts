@@ -37,7 +37,7 @@ export type IDXInit = {
   ceramic: Ceramic
   idx: IDX
   userData?: UserItem
-  myPosts?: Array<PostItem>
+  myPosts: Array<PostItem>
 }
 
 export async function getIDX(seed: Uint8Array): Promise<IDXInit> {
@@ -61,5 +61,5 @@ export async function getIDX(seed: Uint8Array): Promise<IDXInit> {
   // Load the existing posts
   const postsList = await idx.get<{ posts: Array<PostItem> }>('posts')
 
-  return { ceramic, idx, userData: userData?.user, myPosts: postsList?.posts}
+  return { ceramic, idx, userData: userData?.user, myPosts: postsList?.posts ?? []}
 }
