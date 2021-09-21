@@ -10,54 +10,6 @@ import GlobalStyles from './styles/GlobalStyles';
 import { useUserProvider } from './hooks';
 
 import { INFURA_ID, NETWORKS, NETWORK } from './constants';
-import { AuthState, useApp } from './state';
-import { Button, TextField, Typography } from '@material-ui/core';
-import { fromString } from 'uint8arrays';
-import { randomBytes } from '@stablelib/random'
-
-
-
-type AuthenticateProps = {
-  authenticate: (seed: Uint8Array) => void
-  state: AuthState
-}
-
-function AuthenticateScreen({ authenticate, state }: AuthenticateProps) {
-  const [seed, setSeed] = useState('2fb8d63fe0697b8086c94cf05728b06b60af9e68cac5c48d616de7498371a125')
-  const isLoading = state.status === 'loading'
-
-  return state.status === 'done' ? (
-    <Typography>Authenticated with ID {state.idx.id}</Typography>
-  ) : (
-    <>
-      <Typography>
-        You need to authenticate to load your existing notes and create new
-        ones.
-      </Typography>
-      <div>
-        <TextField
-          autoFocus
-          disabled={isLoading}
-          fullWidth
-          id="seed"
-          label="Seed"
-          onChange={(event) => setSeed(event.target.value)}
-          placeholder="base16-encoded string of 32 bytes length"
-          type="text"
-          value={seed}
-        />
-      </div>
-      <Button
-        color="primary"
-        disabled={seed === '' || isLoading}
-        onClick={() => authenticate(fromString(seed, 'base16'))}
-        variant="contained">
-        Authenticate
-      </Button>
-    </>
-  )
-}
-
 
 
 
@@ -128,7 +80,7 @@ if (DEBUG) console.log('🏠 Connecting to provider:', localProviderUrlFromEnv);
 
 
 function App() {
-  const app = useApp()
+
   const mainnetProvider = mainnetInfura;
   const localProvider = new StaticJsonRpcProvider(localProviderUrlFromEnv);
 
@@ -175,9 +127,6 @@ function App() {
 
   return (
     <>
-      <AuthenticateScreen
-        authenticate={app.authenticate}
-        state={app.state.auth} />
       <Layout />
       <GlobalStyles />
     </>
