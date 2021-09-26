@@ -50,6 +50,14 @@
       "last 1 safari version"
     ]
   },
+  "husky": {
+    "hooks": {
+        "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+      "src/**/*.{ts,tsx}": ["eslint", "pretty-quick — staged", "git add"]
+  },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.0",
     "babel-eslint": "^10.1.0",
