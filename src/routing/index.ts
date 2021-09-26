@@ -1,3 +1,4 @@
 export { RenderRoutes, ProtectedRoutes } from './router';
-export { ROUTES } from './routes';
+export { RoutesConfig } from './routesConfig';
 export { history } from './history';
+export { ROUTES_MAP } from './routes';

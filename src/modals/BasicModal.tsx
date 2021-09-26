@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { basicModalState } from '../state/modal_states/index';
+import { basicModalState } from '../state/modalStates';
 import { useRecoilState } from 'recoil';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';

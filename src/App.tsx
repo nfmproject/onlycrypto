@@ -2,24 +2,27 @@ import React from 'react';
 import './App.css';
 import { RecoilRoot } from 'recoil';
 import { HelmetProvider } from 'react-helmet-async';
-import { ROUTES, RenderRoutes } from './routing/index.js';
-import { Modals } from './modals/index';
+import { history, RenderRoutes, RoutesConfig } from './routing';
+import { Modals } from './modals';
+import { Router } from 'react-router-dom';
 
 export default function App() {
   return (
-    <RecoilRoot>
-      <HelmetProvider>
-        <AppContent />
-        <Modals />
-      </HelmetProvider>
-    </RecoilRoot>
+    <Router history={history}>
+      <RecoilRoot>
+        <HelmetProvider>
+          <AppContent />
+        </HelmetProvider>
+      </RecoilRoot>
+    </Router>
   );
 }
 
 function AppContent() {
   return (
     <React.Fragment>
-      <RenderRoutes routes={ROUTES} />
+      <RenderRoutes routes={RoutesConfig} />
+      <Modals />
     </React.Fragment>
   );
 }
