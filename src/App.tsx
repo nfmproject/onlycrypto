@@ -5,8 +5,10 @@ import { HelmetProvider } from 'react-helmet-async';
 import { history, RenderRoutes, RoutesConfig } from './routing';
 import { Modals } from './modals';
 import { Router } from 'react-router-dom';
+import ceramicAuth from './ceramic';
 
 export default function App() {
+  const ceramic = ceramicAuth();
   return (
     <Router history={history}>
       <RecoilRoot>
