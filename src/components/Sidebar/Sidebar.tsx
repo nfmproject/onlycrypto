@@ -14,7 +14,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import PersonIcon from '@mui/icons-material/Person';
-import './Sidebar.css';
+import styles from './Sidebar.module.css';
 import { Button } from '@mui/material';
 
 const defaultState = [
@@ -70,17 +70,23 @@ const defaultState = [
 
 function Sidebar() {
   const [SidebarStates, setSidebarStates] = useState(defaultState);
+
   function setActiveState(text: string) {
     const newState = [...SidebarStates];
+
     newState.map((item) => {
-      if (item.text === text) item.active = true;
-      else item.active = false;
+      if (item.text === text) {
+        item.active = true;
+      } else {
+        item.active = false;
+      }
     });
+
     setSidebarStates(newState);
   }
 
   return (
-    <div className="sidebar">
+    <div className={styles.sidebar}>
       {SidebarStates.map((SidebarState, idx) => (
         <SidebarOption
           key={idx}
@@ -91,10 +97,11 @@ function Sidebar() {
           handleOnClick={setActiveState}
         />
       ))}
-      <Button variant="outlined" className="sidebar-post">
+      <Button variant='outlined' className={styles.sidebarPost}>
         Post
       </Button>
     </div>
   );
 }
+
 export { Sidebar };

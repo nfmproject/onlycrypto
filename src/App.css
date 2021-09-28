@@ -1,4 +1,5 @@
-body {
+
+:root {
   --primary-color: #1d9bf0;
   --primary-text-color: #d9d9d9;
   --primary-background: #000;
@@ -7,7 +8,7 @@ body {
 
 .app {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 10px;

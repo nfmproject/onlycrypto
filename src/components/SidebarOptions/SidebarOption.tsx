@@ -1,5 +1,5 @@
 import React from 'react';
-import './SidebarOption.css';
+import styles from './SidebarOption.module.css';
 
 function SidebarOption(props: {
   active: boolean;
@@ -11,12 +11,14 @@ function SidebarOption(props: {
   function isActive() {
     return <props.activeIcon />;
   }
+
   function isNotActive() {
     return <props.inactiveIcon />;
   }
+
   return (
     <div
-      className={`sidebarOption ${props.active && 'sidebarActive'}`}
+      className={`${styles.sidebarOption} ${props.active && styles.sidebarActive}`}
       onClick={() => props.handleOnClick(props.text)}
     >
       {props.active ? isActive() : isNotActive()}
@@ -24,4 +26,5 @@ function SidebarOption(props: {
     </div>
   );
 }
+
 export { SidebarOption };

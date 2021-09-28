@@ -1,3 +1,5 @@
+@import '../../App.css';
+
 .sidebar {
   border-right: 1px solid var(--sidebar-hover-background);
   flex: 0.1;
@@ -6,7 +8,7 @@
   padding: 0 20px;
 }
 
-.sidebar-post {
+.sidebarPost {
   background-color: var(--primary-color) !important;
   border: none !important;
   color: white !important;

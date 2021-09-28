@@ -10,9 +10,11 @@ export default function App() {
   return (
     <Router history={history}>
       <RecoilRoot>
-        <HelmetProvider>
-          <AppContent />
-        </HelmetProvider>
+        <div className='app'>
+          <HelmetProvider>
+            <AppContent />
+          </HelmetProvider>
+        </div>
       </RecoilRoot>
     </Router>
   );

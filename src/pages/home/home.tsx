@@ -2,14 +2,7 @@ import React from 'react';
 import { Sidebar } from '../../components/Sidebar';
 
 function Home({ ...props }: any) {
-  return (
-    <div className="app">
-      {/* SIDEBAR */}
-      <Sidebar />
-      {/* FEED */}
-      {/* WIDGETS */}
-    </div>
-  );
+  return <Sidebar />;
 }
 
 export default Home;
