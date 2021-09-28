@@ -1,7 +1,9 @@
 language: node_js
 node_js:
-  - "12"
+  - "stable"
+cache:
+  directories:
+    - node_modules
 script:
-  - npm i
-  - npx run check
+  - npx eslint .
   - npm run build
