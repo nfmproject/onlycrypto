@@ -3,7 +3,7 @@
 .sidebar {
   border-right: 1px solid var(--sidebar-hover-background);
   flex: 0.1;
-  min-width: 220px;
+  min-width: 221px;
   margin-top: 20px;
   padding: 0 20px;
 }
