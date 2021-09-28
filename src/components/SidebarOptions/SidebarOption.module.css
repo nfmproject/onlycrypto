@@ -1,0 +1,33 @@
+@import '../../App.css';
+
+.sidebarOption {
+  display: flex;
+  border-radius: 30px;
+  align-items: center;
+  cursor: pointer;
+  width: min-content;
+  color: var(--primary-text-color) !important;
+  @apply px-4 py-4 font-bold
+}
+
+.sidebarOption:hover {
+  background-color: var(--sidebar-hover-background);
+  color: var(--primary-color);
+  transition-property: color background-color;
+  transition-duration: 100ms;
+  transition-timing-function: ease-out;
+}
+
+.sidebarOption > .MuiSvgIcon-root {
+  padding: 12px;
+}
+
+.sidebarOption > h2 {
+  font-weight: 500;
+  font-size: 15px;
+  margin-right: 20px;
+}
+
+.sidebarActive > h2 {
+  font-weight: 700 !important;
+}

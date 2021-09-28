@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -26,7 +26,7 @@ export const ModalWrapper = () => {
 
   return (
     <div>
-      <Box sx={style}>
+      <Box>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Text in a modal
         </Typography>
