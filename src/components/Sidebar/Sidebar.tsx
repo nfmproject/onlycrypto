@@ -97,7 +97,7 @@ function Sidebar() {
           handleOnClick={setActiveState}
         />
       ))}
-      <Button variant='outlined' className={styles.sidebarPost}>
+      <Button variant="outlined" className={styles.sidebarPost}>
         Post
       </Button>
     </div>
