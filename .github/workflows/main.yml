@@ -1,25 +1,35 @@
-name: Prettier
+name: Lint
 
 on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  prettier:
+  run-linters:
+    name: Run linters
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        # Make sure the actual branch is checked out when running on pull requests
-        ref: ${{ github.head_ref }}
-        # This is important to fetch the changes to the previous commit
-        fetch-depth: 0
+      - name: Check out Git repository
+        uses: actions/checkout@v2
 
-    - name: Prettify code
-      uses: creyD/prettier_action@v4.0
-      with:
-        # This part is also where you can pass other options, for example:
-        prettier_options: --write src/**/*.{ts,tsx}
-        only_changed: True
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      # ESLint and Prettier must be in `package.json`
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          eslint: true
+          prettier: true
