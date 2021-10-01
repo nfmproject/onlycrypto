@@ -6,8 +6,8 @@
   align-items: center;
   cursor: pointer;
   width: min-content;
-  color: var(--primary-text-color) !important;
-  @apply px-4 py-4 font-bold
+  color: var(--text-color) !important;
+  @apply px-4 py-3.5 font-bold;
 }
 
 .sidebarOption:hover {
@@ -18,16 +18,10 @@
   transition-timing-function: ease-out;
 }
 
-.sidebarOption > .MuiSvgIcon-root {
-  padding: 12px;
-}
-
 .sidebarOption > h2 {
-  font-weight: 500;
-  font-size: 15px;
-  margin-right: 20px;
+  @apply font-normal text-xl mr-4 ml-5;
 }
 
 .sidebarActive > h2 {
-  font-weight: 700 !important;
+  @apply font-bold;
 }
