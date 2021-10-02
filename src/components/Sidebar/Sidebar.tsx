@@ -17,6 +17,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import styles from './Sidebar.module.css';
 import { Button } from '@mui/material';
+import { useThemeContext } from '../../hooks/useTheme';
 
 const defaultState = [
   {
@@ -71,7 +72,7 @@ const defaultState = [
 
 function Sidebar() {
   const [SidebarStates, setSidebarStates] = useState(defaultState);
-
+  const theme = useThemeContext();
   function setActiveState(text: string) {
     const newState = [...SidebarStates];
 
@@ -102,7 +103,7 @@ function Sidebar() {
             handleOnClick={setActiveState}
           />
         ))}
-        <Button variant="outlined" className={styles.sidebarPost}>
+        <Button className={styles.sidebarPost} onClick={theme.toggleTheme}>
           Post
         </Button>
       </div>

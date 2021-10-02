@@ -1,25 +1,21 @@
 @import '../../App.css';
 
 .sidebarOption {
-  display: flex;
-  border-radius: 30px;
-  align-items: center;
-  cursor: pointer;
-  width: min-content;
-  color: var(--text-color) !important;
-  @apply px-4 py-3.5 font-bold;
-}
-
-.sidebarOption:hover {
-  background-color: var(--sidebar-hover-background);
-  color: var(--primary-color);
-  transition-property: color background-color;
-  transition-duration: 100ms;
-  transition-timing-function: ease-out;
+  @apply flex flex-row items-center;
+  @apply cursor-pointer;
+  @apply rounded-full;
+  @apply text-text-primary !important;
+  @apply max-w-min;
+  @apply p-3 my-0.5;
+  @apply font-bold;
+  @apply bg-background-primary;
+  @apply transition-colors duration-100 ease-out;
+  @apply hover:bg-background-hover hover:bg-opacity-10;
 }
 
 .sidebarOption > h2 {
-  @apply font-normal text-xl mr-4 ml-5;
+  @apply mr-4 ml-5;
+  @apply font-normal text-xl;
 }
 
 .sidebarActive > h2 {

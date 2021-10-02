@@ -7,8 +7,7 @@
 }
 
 #root {
-  /* this should make the background black */
-  @apply bg-primary-100;
+  @apply bg-background-primary !important;
 }
 
 body {

@@ -1,12 +1,9 @@
-/* using these values taaki i can use them as a string in the tailwind config with the opacity wala function */
-/* but yeh saala chal nahi raha */
-
-.themeTwitterDark {
+.themeDark {
   --primary-text-color: 217 217 217;
   --secondary-text-color: 110 118 125;
   --accent-text-color: 27 149 224;
   --primary-background: 0 0 0;
-  --secondary-background: 21, 24, 28;
+  --secondary-background: 21 24 28;
   --button-color: 29 155 240;
   --outline-color: 47 51 54;
 }
