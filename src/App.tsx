@@ -6,20 +6,19 @@ import { history, RenderRoutes, RoutesConfig } from './routing';
 import { Modals } from './modals';
 import { Router } from 'react-router-dom';
 import { basicAuthState } from './state/authStates/basicAuth';
+import CeramicAuth from './ceramic';
 // import CeramicAuth from './ceramic';
 
 export default function App() {
   // const ceramic = CeramicAuth();
   const [authState, setAuthState] = useRecoilState(basicAuthState)
+  const ceramic = CeramicAuth()
   return (
     <Router history={history}>
-      <RecoilRoot>
-        <div className="app">
-          <HelmetProvider>
-            <AppContent />
-          </HelmetProvider>
-        </div>
-      </RecoilRoot>
+        <HelmetProvider>
+          <button onClick={ceramic.authenticate}> { JSON.stringify(authState)} </button>
+          <AppContent />
+        </HelmetProvider>
     </Router>
   );
 }
