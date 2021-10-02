@@ -10,7 +10,7 @@ export default function App() {
   return (
     <Router history={history}>
       <RecoilRoot>
-        <div className='app'>
+        <div className="app">
           <HelmetProvider>
             <AppContent />
           </HelmetProvider>
