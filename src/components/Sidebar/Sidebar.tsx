@@ -14,8 +14,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import PersonIcon from '@mui/icons-material/Person';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import styles from './Sidebar.module.css';
 import { Button } from '@mui/material';
+import { useThemeContext } from '../../hooks/useTheme';
 
 const defaultState = [
   {
@@ -70,7 +72,7 @@ const defaultState = [
 
 function Sidebar() {
   const [SidebarStates, setSidebarStates] = useState(defaultState);
-
+  const theme = useThemeContext();
   function setActiveState(text: string) {
     const newState = [...SidebarStates];
 
@@ -87,19 +89,25 @@ function Sidebar() {
 
   return (
     <div className={styles.sidebar}>
-      {SidebarStates.map((SidebarState, idx) => (
-        <SidebarOption
-          key={idx}
-          text={SidebarState.text}
-          inactiveIcon={SidebarState.inactiveIcon}
-          activeIcon={SidebarState.activeIcon}
-          active={SidebarState.active}
-          handleOnClick={setActiveState}
-        />
-      ))}
-      <Button variant="outlined" className={styles.sidebarPost}>
-        Post
-      </Button>
+      <div className={styles.topSide}>
+        <div className={styles.logoWrapper}>
+          <TwitterIcon className={styles.logo} />
+        </div>
+        {SidebarStates.map((SidebarState, idx) => (
+          <SidebarOption
+            key={idx}
+            text={SidebarState.text}
+            inactiveIcon={SidebarState.inactiveIcon}
+            activeIcon={SidebarState.activeIcon}
+            active={SidebarState.active}
+            handleOnClick={setActiveState}
+          />
+        ))}
+        <Button className={styles.sidebarPost} onClick={theme.toggleTheme}>
+          Post
+        </Button>
+      </div>
+      <div className="bottomSide"></div>
     </div>
   );
 }

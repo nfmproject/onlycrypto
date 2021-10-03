@@ -1,22 +1,32 @@
 @import '../../App.css';
 
 .sidebar {
-  border-right: 1px solid var(--sidebar-hover-background);
-  flex: 0.1;
+  flex: 0.2;
   min-width: 220px;
-  margin-top: 20px;
-  padding: 0 20px;
+  @apply sticky;
+  @apply px-3;
+  @apply border-r border-outline;
+}
+
+.logo {
+  @apply text-text-primary;
+}
+
+.logoWrapper {
+  @apply px-4 py-3.5;
+}
+
+.topSide {
+  @apply flex flex-col;
 }
 
 .sidebarPost {
-  background-color: var(--primary-color) !important;
-  border: none !important;
-  color: white !important;
-  font-weight: 700 !important;
-  text-transform: inherit !important;
-  border-radius: 30px !important;
-  height: 40px !important;
-  margin-top: 20px !important;
-  padding: 0 20px !important;
   min-width: 190px !important;
+  min-height: 50px !important;
+  text-transform: inherit !important;
+  font-size: 17px !important;
+  @apply px-5 mt-5 mr-5 !important;
+  @apply font-bold !important;
+  @apply border-none rounded-full !important;
+  @apply text-white bg-button !important;
 }
