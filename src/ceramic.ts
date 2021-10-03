@@ -8,9 +8,6 @@ import { basicAuthState } from './state/authStates/basicAuth'
 
 
 
-declare const window: any;
-
-
 const ceramic = new CeramicClient("https://ceramic-clay.3boxlabs.com")
 
 export default function CeramicAuth() {
