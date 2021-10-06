@@ -2,12 +2,12 @@ import Landing from '../pages/home/home';
 import Home from '../pages/home/home';
 
 export const ROUTES_MAP = {
-  home: {
+  login: {
     component: Landing,
     path: '/',
     key: 'ROOT',
   },
-  login: {
+  home: {
     component: Home,
     path: '/home',
     key: 'HOME',
