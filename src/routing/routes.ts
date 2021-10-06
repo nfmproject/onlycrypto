@@ -5,7 +5,7 @@ export const ROUTES_MAP = {
   home: {
     component: Landing,
     path: '/',
-    key: 'LOGIN',
+    key: 'ROOT',
   },
   login: {
     component: Home,
