@@ -6,6 +6,15 @@ import ThreeIdResolver from '@ceramicnetwork/3id-did-resolver';
 import { useRecoilState } from 'recoil';
 import { basicAuthState } from './state/authStates/basicAuth';
 
+import {
+  FortmaticConnector,
+  InjectedConnector,
+  PortisConnector,
+  TorusConnector,
+  WalletConnectConnector,
+} from '@ceramicstudio/multiauth'
+import type { PartialConnectorConfig } from '@ceramicstudio/multiauth'
+
 const ceramic = new CeramicClient('https://ceramic-clay.3boxlabs.com');
 
 export default function CeramicAuth() {
