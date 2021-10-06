@@ -12,8 +12,8 @@ import {
   PortisConnector,
   TorusConnector,
   WalletConnectConnector,
-} from '@ceramicstudio/multiauth'
-import type { PartialConnectorConfig } from '@ceramicstudio/multiauth'
+} from '@ceramicstudio/multiauth';
+import type { PartialConnectorConfig } from '@ceramicstudio/multiauth';
 
 const ceramic = new CeramicClient('https://ceramic-clay.3boxlabs.com');
 

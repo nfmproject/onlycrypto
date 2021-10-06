@@ -6,7 +6,6 @@ export const ROUTES_MAP = {
     component: Landing,
     path: '/',
     key: 'LOGIN',
-    
   },
   home: {
     component: Home,
