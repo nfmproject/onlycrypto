@@ -1,0 +1,22 @@
+@import '../../App.css';
+
+
+.main {
+  @apply flex flex-col space-y-6 items-center;
+  @apply cursor-pointer;
+  @apply rounded-full;
+  @apply text-text-primary !important;
+  @apply font-bold;
+  @apply bg-background-primary;
+  @apply w-screen
+}
+
+.input {
+  @apply hidden
+}
+
+.avatar {
+  @apply h-24
+}
+
+
