@@ -1,0 +1,15 @@
+@import '../../App.css';
+
+.settingsPage {
+  flex: 0.8;
+  @apply grid grid-cols-5;
+  @apply w-full;
+}
+
+.settingList {
+  @apply col-start-1 col-end-3 col-span-2 bg-red-300;
+}
+
+.settingListOptions {
+  @apply col-start-3 col-end-6 bg-yellow-700;
+}
