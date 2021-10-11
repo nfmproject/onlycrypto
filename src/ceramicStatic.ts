@@ -10,28 +10,23 @@ const CERAMIC_URL = 'http://localhost:7007'
 
 
 const definitions = {
-    notes: '',
-}
-const schemas = {
-    Note: '',
-    NotesList: '',
+    posts: '',
 }
 
-
-
-
-export type NoteItem = {
+export type PostItem = {
     id: string
     title: string
 }
 
-export type NotesList = { notes: Array<NoteItem> }
+export type PostsList = { posts: Array<PostItem> }
 
-export type IDXInit = NotesList & {
+export type IDXInit = PostsList & {
     ceramic: Ceramic
     idx: IDX
 }
 
+
+// USE Hardcoded seed here
 export async function getIDX(seed: Uint8Array): Promise<IDXInit> {
     const ceramic = new Ceramic(CERAMIC_URL)
     const resolver = new Resolver({
@@ -46,7 +41,7 @@ export async function getIDX(seed: Uint8Array): Promise<IDXInit> {
     // Create the IDX instance with the definitions aliases from the config
     const idx = new IDX({ ceramic, aliases: definitions })
 
-    // Load the existing notes
-    const notesList = await idx.get<{ notes: Array<NoteItem> }>('notes')
-    return { ceramic, idx, notes: notesList?.notes ?? [] }
+    // Load the existing posts
+    const postsList = await idx.get<{ posts: Array<PostItem> }>('posts')
+    return { ceramic, idx, posts: postsList?.posts ?? [] }
 }
