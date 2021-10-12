@@ -6,4 +6,5 @@ function AuthButton({ ...props }: any) {
   return <Button onClick={ceramic.authenticate}>{ceramic.authState}</Button>;
 }
 
+
 export default AuthButton;
