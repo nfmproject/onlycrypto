@@ -1,5 +1,5 @@
-import AuthButton from '../components/authButton/authButton';
 import Home from '../pages/home/home';
+import SignUp from '../pages/signup/singup';
 
 export const ROUTES_MAP = {
   home: {
@@ -7,9 +7,9 @@ export const ROUTES_MAP = {
     path: '/',
     key: 'ROOT',
   },
-  login: {
-    component: AuthButton,
-    path: '/login',
-    key: 'LOGIN',
+  singUp: {
+    component: SignUp,
+    path: '/signup',
+    key: 'SIGNUP',
   },
 };

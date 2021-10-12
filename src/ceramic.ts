@@ -1,10 +1,10 @@
-import { ThreeIdConnect, EthereumAuthProvider } from '@3id/connect';
+import { EthereumAuthProvider, ThreeIdConnect } from '@3id/connect';
 import CeramicClient from '@ceramicnetwork/http-client';
 import { DID } from 'dids';
 import KeyDidResolver from 'key-did-resolver';
 import ThreeIdResolver from '@ceramicnetwork/3id-did-resolver';
 import { useRecoilState } from 'recoil';
-import { basicAuthState } from './state/authStates/basicAuth';
+import { AuthStatus, basicAuthState } from './state/authStates';
 
 const ceramic = new CeramicClient('https://ceramic-clay.3boxlabs.com');
 
@@ -17,8 +17,8 @@ export default function CeramicAuth() {
    */
   const authenticate = async () => {
     switch (authState) {
-      case 'pending':
-        setAuthState('loading');
+      case AuthStatus.PENDING:
+        setAuthState(AuthStatus.LOADING);
         const addresses = await window.ethereum.enable();
         const threeIdConnect = new ThreeIdConnect();
         const authProvider = new EthereumAuthProvider(window.ethereum, addresses[0]);
@@ -36,18 +36,18 @@ export default function CeramicAuth() {
         ceramic.did
           .authenticate()
           .then((res) => {
-            setAuthState('done');
+            setAuthState(AuthStatus.AUTHENTICATED);
           })
           .catch(() => {
             alert('AuthFailed!!!');
-            setAuthState('failed');
+            setAuthState(AuthStatus.FAILED);
           });
         return;
-      case 'loading':
+      case AuthStatus.LOADING:
         // TODO : modal to keep
         alert('please wait!!!');
         return;
-      case 'done':
+      case AuthStatus.AUTHENTICATED:
         alert('Already been authenticated 🎉 ');
         return;
       default:
@@ -58,7 +58,7 @@ export default function CeramicAuth() {
    * sets Auth state to pending
    */
   const resetDid = async () => {
-    setAuthState('pending');
+    setAuthState(AuthStatus.PENDING);
   };
 
   return {
