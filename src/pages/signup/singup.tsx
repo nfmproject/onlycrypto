@@ -34,7 +34,7 @@ function SignUp({ ...props }: any) {
       <FormInput value={username} setValue={setUsername} label={'Username'} error={usernameError} />
       <FormInput value={name} setValue={setName} label={'FullName'} error={nameError} />
       <PasswordInput values={pwd} setValues={setPwd} label={'Password'} error={pwdError} />
-      <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-14 rounded-full'>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-14 rounded-full">
         Submit
       </button>
     </div>

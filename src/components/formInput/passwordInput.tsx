@@ -1,5 +1,12 @@
 import React from 'react';
-import { FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
+import {
+  FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export interface PwdState {
@@ -31,30 +38,30 @@ export function PasswordInput({ values, error, setValues, label }: State, ...pro
   };
 
   return (
-    <FormControl fullWidth error={error.length > 0} variant='outlined'>
-      <InputLabel htmlFor='component-error'>{label}</InputLabel>
+    <FormControl fullWidth error={error.length > 0} variant="outlined">
+      <InputLabel htmlFor="component-error">{label}</InputLabel>
       <OutlinedInput
-        id='component-error'
+        id="component-error"
         type={values.showPassword ? 'text' : 'password'}
         value={values.password}
         onChange={handleChange('password')}
         endAdornment={
-          <InputAdornment position='end'>
+          <InputAdornment position="end">
             <IconButton
-              aria-label='toggle password visibility'
+              aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
-              edge='end'
+              edge="end"
             >
               {values.showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
         }
-        aria-describedby='component-error-text'
-        label='Password'
+        aria-describedby="component-error-text"
+        label="Password"
         error={error.length > 0}
       />
-      <FormHelperText id='component-error-text'>{error}</FormHelperText>
+      <FormHelperText id="component-error-text">{error}</FormHelperText>
     </FormControl>
   );
 }

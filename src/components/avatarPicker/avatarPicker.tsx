@@ -15,14 +15,14 @@ export const AvatarPicker: FunctionComponent<Props> = ({ avatar, changeHandler, 
     <>
       <input
         onChange={changeHandler}
-        accept='image/*'
-        id='icon-button-file'
+        accept="image/*"
+        id="icon-button-file"
         className={styles.input}
-        type='file'
+        type="file"
       />
-      <label htmlFor='icon-button-file'>
-        <IconButton color='primary' aria-label='upload picture' component='span'>
-          <Avatar alt='Cindy Baker' src={avatar} sx={{ width: size ?? 80, height: size ?? 80 }} />
+      <label htmlFor="icon-button-file">
+        <IconButton color="primary" aria-label="upload picture" component="span">
+          <Avatar alt="Cindy Baker" src={avatar} sx={{ width: size ?? 80, height: size ?? 80 }} />
         </IconButton>
       </label>
     </>

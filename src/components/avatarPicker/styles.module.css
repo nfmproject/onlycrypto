@@ -1,10 +1,9 @@
 @import '../../App.css';
 
-
 .input {
-  @apply hidden
+  @apply hidden;
 }
 
 .avatar {
-  @apply h-24
+  @apply h-24;
 }

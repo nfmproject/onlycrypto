@@ -1,6 +1,5 @@
 @import '../../App.css';
 
-
 .main {
   @apply flex flex-col space-y-6 items-center;
   @apply cursor-pointer;
@@ -8,15 +7,13 @@
   @apply text-text-primary !important;
   @apply font-bold;
   @apply bg-background-primary;
-  @apply w-screen
+  @apply w-screen;
 }
 
 .input {
-  @apply hidden
+  @apply hidden;
 }
 
 .avatar {
-  @apply h-24
+  @apply h-24;
 }
-
-

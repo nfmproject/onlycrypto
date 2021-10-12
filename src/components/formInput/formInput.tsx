@@ -16,7 +16,7 @@ function FormInput({ value, setValue, label, error }: State, ...props: any) {
   return (
     <TextField
       error={error ? error.length > 0 : false}
-      id='outlined-error-helper-text'
+      id="outlined-error-helper-text"
       label={label ?? 'Value'}
       value={value}
       onChange={handleChange}
