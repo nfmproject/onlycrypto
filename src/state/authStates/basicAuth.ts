@@ -1,10 +1,10 @@
 import { atom } from 'recoil';
 
 export enum AuthStatus {
-  PENDING,
-  AUTHENTICATED,
-  LOADING,
-  FAILED,
+  PENDING = "PENDING",
+  AUTHENTICATED = "AUTHENTICATED",
+  LOADING = "LOADING",
+  FAILED = "FAILED",
 }
 
 const initialState: AuthStatus = AuthStatus.PENDING;
