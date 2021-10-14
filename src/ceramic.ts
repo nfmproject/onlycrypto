@@ -72,16 +72,16 @@ export default function CeramicAuth() {
    * @returns document id
    */
 
-  const createData = async () => {
+  const createData = async (data : object) => {
     console.log(ceramic.did?.id)
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.create(
         ceramic,
-        { "lauda": 'lassan' },
+        data,
         {
           controllers: [ceramic.did.id],
           family: 'doc family',
-          schema: "k3y52l7qbv1frxt706gqfzmq6cbqdkptzk8uudaryhlkf6ly9vx21hqu4r6k1jqio",  // TODO : fix and set schema
+          // schema: "k3y52l7qbv1frxt706gqfzmq6cbqdkptzk8uudaryhlkf6ly9vx21hqu4r6k1jqio",  // TODO : fix and set schema
         },
         { pin: true }
       )
@@ -98,9 +98,8 @@ export default function CeramicAuth() {
    * @returns Content 
    */
 
-  const readData = async () => {
+  const readData = async (streamId : string) => {
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
-      const streamId = 'kjzl6cwe1jw145lb9e5lwoldsauexwj573igblemxbzzbu0cqyniukqc0h10h8h'
       const doc = await TileDocument.load(ceramic, streamId)
       console.log(doc.content)
       return doc.content
@@ -114,11 +113,10 @@ export default function CeramicAuth() {
    * Update the existing data on ceramic server
    * @returns Document Updated
    */
-  const updateData = async () => {
+  const updateData = async (streamId : string, data : object) => {
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
-      const streamId = 'kjzl6cwe1jw145lb9e5lwoldsauexwj573igblemxbzzbu0cqyniukqc0h10h8h'
       const doc = await TileDocument.load(ceramic, streamId)
-      await doc.update({ foo: 'baz' })
+      await doc.update(data)
       return doc
     } else {
       console.log("no ceramic did or busy")
