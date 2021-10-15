@@ -7,11 +7,21 @@ import { useRecoilState } from 'recoil';
 import { AuthStatus, basicAuthState } from './state/authStates';
 import { TileDocument } from '@ceramicnetwork/stream-tile'
 import { ceramicState, CeramicStatus } from './state/CeramicStates';
+import profile from './ceramicFunctions/ceramicTypes';
 
 const ceramic = new CeramicClient('https://ceramic-clay.3boxlabs.com');
 
 
 // TODO : Ceramic breaks without persmissions, wrap into try catch
+export interface CeramicType {
+  authenticate: () => Promise<void>;
+  resetDid: () => Promise<void>;
+  createData: (data: object, schema?: string | undefined) => Promise<TileDocument<object> | "error">;
+  readData: (streamId: string) => Promise<any>;
+  updateData: (streamId: string, data: object) => Promise<any>;
+  authState: AuthStatus;
+}
+
 
 export default function CeramicAuth() {
   const [authState, setAuthState] = useRecoilState(basicAuthState);
@@ -71,8 +81,7 @@ export default function CeramicAuth() {
    * createData
    * @returns document id
    */
-
-  const createData = async (data : object) => {
+  const createData = async (data: object, schema?: string) => {
     console.log(ceramic.did?.id)
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.create(
@@ -81,6 +90,7 @@ export default function CeramicAuth() {
         {
           controllers: [ceramic.did.id],
           family: 'doc family',
+          schema: schema,  // TODO : fix and set schema
           // schema: "k3y52l7qbv1frxt706gqfzmq6cbqdkptzk8uudaryhlkf6ly9vx21hqu4r6k1jqio",  // TODO : fix and set schema
         },
         { pin: true }
@@ -94,11 +104,10 @@ export default function CeramicAuth() {
   }
 
   /**
-   * 
+   * read data from ceramic 
    * @returns Content 
    */
-
-  const readData = async (streamId : string) => {
+  const readData = async (streamId: string) => {
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.load(ceramic, streamId)
       console.log(doc.content)
@@ -113,17 +122,24 @@ export default function CeramicAuth() {
    * Update the existing data on ceramic server
    * @returns Document Updated
    */
-  const updateData = async (streamId : string, data : object) => {
+  const updateData = async (streamId: string, data: object) => {
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.load(ceramic, streamId)
-      await doc.update(data)
-      return doc
+      if (doc.metadata.controllers.includes(ceramic.did.id)) {
+        await doc.update(data)
+        return doc
+      } else {
+        console.error('no write access');
+        return ({ error: 'no write access' });
+      }
     } else {
-      console.log("no ceramic did or busy")
+      console.error("no ceramic did or busy")
       return "error"
     }
-
   }
+
+
+
 
   return {
     authenticate,
