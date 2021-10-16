@@ -7,7 +7,6 @@ import { useRecoilState } from 'recoil';
 import { AuthStatus, basicAuthState } from './state/authStates';
 import { TileDocument } from '@ceramicnetwork/stream-tile'
 import { ceramicState, CeramicStatus } from './state/CeramicStates';
-import profile from './ceramicFunctions/ceramicTypes';
 
 const ceramic = new CeramicClient('https://ceramic-clay.3boxlabs.com');
 
@@ -81,7 +80,7 @@ export default function CeramicAuth() {
    * createData
    * @returns document id
    */
-  const createData = async (data: object, schema?: string) => {
+  const createData = async (data: object, schema?: string , tagsData ?: Array<string>) => {
     console.log(ceramic.did?.id)
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.create(
@@ -91,7 +90,7 @@ export default function CeramicAuth() {
           controllers: [ceramic.did.id],
           family: 'doc family',
           schema: schema,  // TODO : fix and set schema
-          // schema: "k3y52l7qbv1frxt706gqfzmq6cbqdkptzk8uudaryhlkf6ly9vx21hqu4r6k1jqio",  // TODO : fix and set schema
+          tags: tagsData,
         },
         { pin: true }
       )
