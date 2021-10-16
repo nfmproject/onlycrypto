@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
 
 export enum CeramicStatus {
-  IDLE = "IDLE",
-  PENDING = "PENDING",
-  FAILED = "FAILED"
+  IDLE = 'IDLE',
+  PENDING = 'PENDING',
+  FAILED = 'FAILED',
 }
 
 const initialState: CeramicStatus = CeramicStatus.FAILED;
