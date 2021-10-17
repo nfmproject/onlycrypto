@@ -5,7 +5,6 @@ export interface profileType {
   description?: string;
   gender?: string;
   residenceCountry?: string;
-  ceramicPostList?: string;
 }
 
 export interface postType {
