@@ -13,6 +13,12 @@ const RoutesConfig = [
     exact: true,
     component: ROUTES_MAP.home.component,
   },
+  {
+    path: ROUTES_MAP.temp.path,
+    key: ROUTES_MAP.temp.key,
+    exact: true,
+    component: ROUTES_MAP.temp.component,
+  },
 ];
 
 export { RoutesConfig };
