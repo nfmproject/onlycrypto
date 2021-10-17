@@ -3,7 +3,7 @@ export interface profileType {
   firstName: string;
   lastName?: string;
   description?: string;
-  gender?: string  
+  gender?: string;
   residenceCountry?: string;
 }
 
