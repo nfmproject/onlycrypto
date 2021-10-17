@@ -1,10 +1,11 @@
 export interface profileType {
   username: string;
   firstName: string;
-  lastName: string;
-  description: string;
-  gender: string;
-  residenceCountry: string;
+  lastName?: string;
+  description?: string;
+  gender?: string;
+  residenceCountry?: string;
+  ceramicPostList?: string;
 }
 
 export interface postType {
@@ -12,6 +13,7 @@ export interface postType {
   username: string;
   postText: string;
   encryptedText?: string;
-  iv?: string;
+  iv?: string; // needed for encryption
   locks?: Array<string>;
+  taggedUsers?: Array<string>;
 }
