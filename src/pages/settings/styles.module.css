@@ -1,0 +1,10 @@
+@import '../../App.css';
+
+.mainContent {
+  flex: 0.2;
+  min-width: 220px;
+  @apply sticky;
+  @apply px-3;
+  @apply border-r border-outline;
+  @apply cursor-pointer;
+}

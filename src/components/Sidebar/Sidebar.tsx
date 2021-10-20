@@ -18,6 +18,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import styles from './Sidebar.module.css';
 import { Button } from '@mui/material';
 import { useThemeContext } from '../../hooks/useTheme';
+import { useHistory } from 'react-router-dom';
 
 const defaultState = [
   {
@@ -43,36 +44,43 @@ const defaultState = [
     inactiveIcon: MailOutlineIcon,
     activeIcon: MailRoundedIcon,
     active: false,
+    path: '/settings/1',
   },
   {
     text: 'Bookmarks',
     inactiveIcon: BookmarkBorderIcon,
     activeIcon: BookmarkIcon,
     active: false,
+    path: '/settings/2',
   },
   {
     text: 'Lists',
     inactiveIcon: ListAltIcon,
     activeIcon: ViewListIcon,
     active: false,
+    path: '/settings',
   },
   {
     text: 'Profile',
     inactiveIcon: PermIdentityIcon,
     activeIcon: PersonIcon,
     active: false,
+    path: '/',
   },
   {
     text: 'More',
     inactiveIcon: MoreHorizIcon,
     activeIcon: MoreHorizIcon,
     active: false,
+    path: '/signup',
   },
 ];
 
 function Sidebar() {
   const [SidebarStates, setSidebarStates] = useState(defaultState);
   const theme = useThemeContext();
+  const history = useHistory();
+
   function setActiveState(text: string) {
     const newState = [...SidebarStates];
 
@@ -83,8 +91,12 @@ function Sidebar() {
         item.active = false;
       }
     });
+    //TODO Refine names suck
+    const details = defaultState.find((item) => item.text === text);
+    const path = details?.path ?? '/';
 
     setSidebarStates(newState);
+    history.push(path);
   }
 
   return (

@@ -1,13 +1,16 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
+import React from 'react';
 
 function RenderRoutes({ routes }: any) {
   return (
-    <Switch>
-      {routes.map((route: any, i: any) => {
-        return <RouteWithSubRoutes key={route.key} {...route} />;
-      })}
-      <Route component={() => <h1>Not Found!</h1>} />
-    </Switch>
+    <>
+      <Switch>
+        {routes.map((route: any, i: any) => {
+          return <RouteWithSubRoutes key={route.key} {...route} />;
+        })}
+        <Route component={() => <h1>Not Found!</h1>} />
+      </Switch>
+    </>
   );
 }
 
@@ -30,4 +33,4 @@ function RouteWithSubRoutes(route: any) {
   );
 }
 
-export { RenderRoutes, ProtectedRoutes };
+export { RenderRoutes, ProtectedRoutes, RouteWithSubRoutes };
