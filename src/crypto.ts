@@ -1,9 +1,4 @@
-import {
-  decodeArrayBuffer,
-  decodeText,
-  encodeArrayBuffer,
-  encodeText,
-} from "./lib/buffer";
+import { decodeArrayBuffer, decodeText, encodeArrayBuffer, encodeText } from './lib/buffer';
 
 export async function encryptUnlockData(content: string): Promise<{
   iv: string;
@@ -11,17 +6,16 @@ export async function encryptUnlockData(content: string): Promise<{
   encrypted: string;
 }> {
   const iv: ArrayBuffer = crypto.getRandomValues(new Uint8Array(16));
-  const key = await crypto.subtle.generateKey(
-    { name: "AES-GCM", length: 256 },
-    true,
-    ["encrypt", "decrypt"]
-  );
+  const key = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, true, [
+    'encrypt',
+    'decrypt',
+  ]);
   const encrypted = await crypto.subtle.encrypt(
-    { name: "AES-GCM", iv },
+    { name: 'AES-GCM', iv },
     key,
-    typeof content === "string" ? encodeText(content) : content
+    typeof content === 'string' ? encodeText(content) : content,
   );
-  const exportkey = await crypto.subtle.exportKey("raw", key);
+  const exportkey = await crypto.subtle.exportKey('raw', key);
 
   return {
     iv: encodeArrayBuffer(iv),
@@ -38,19 +32,19 @@ export async function decryptUnlockData(data: {
   content: string;
 }> {
   const importkey = await crypto.subtle.importKey(
-    "raw",
+    'raw',
     decodeArrayBuffer(data.key),
-    "AES-GCM",
+    'AES-GCM',
     true,
-    ["decrypt"]
+    ['decrypt'],
   );
   const decrypted = await crypto.subtle.decrypt(
     {
-      name: "AES-GCM",
+      name: 'AES-GCM',
       iv: decodeArrayBuffer(data.iv),
     },
     importkey,
-    decodeArrayBuffer(data.encrypted)
+    decodeArrayBuffer(data.encrypted),
   );
   return { content: decodeText(decrypted) };
 }

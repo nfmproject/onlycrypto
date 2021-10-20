@@ -1,4 +1,4 @@
-import { blobToArrayBuffer } from "./blob";
+import { blobToArrayBuffer } from './blob';
 
 export function encodeText(input: string) {
   return new TextEncoder().encode(input);
@@ -18,7 +18,7 @@ export function decodeArrayBuffer(input: string) {
 }
 
 export function encodeArrayBuffer(input: ArrayBuffer) {
-  let encoded = "";
+  let encoded = '';
   for (const code of new Uint8Array(input)) {
     encoded += String.fromCharCode(code);
   }
