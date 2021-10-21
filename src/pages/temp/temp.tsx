@@ -45,6 +45,7 @@ function Temp({ ...props }: any) {
       console.log(JSON.stringify(val));
     });
   }
+
   return (
     <div className={styles.main}>
       <AuthButton />
