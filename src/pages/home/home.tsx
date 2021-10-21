@@ -1,7 +1,6 @@
-import React from 'react';
 import { Sidebar } from '../../components/Sidebar';
 
-function Home({ ...props }: any) {
+function Home() {
   return (
     <div>
       <Sidebar />

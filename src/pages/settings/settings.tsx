@@ -21,8 +21,8 @@ function Settings({ ...props }: any) {
         Content route 2
       </div>
       <Switch>
-        <Route path='/settings/1' exact component={() => <div>shoelaces!</div>} />
-        <Route path='/settings/2' exact component={() => <div>shoelaces2!</div>} />
+        <Route path="/settings/1" exact component={() => <div>shoelaces!</div>} />
+        <Route path="/settings/2" exact component={() => <div>shoelaces2!</div>} />
       </Switch>
     </>
   );
