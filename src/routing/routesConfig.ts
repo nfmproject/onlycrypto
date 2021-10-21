@@ -19,6 +19,25 @@ const RoutesConfig = [
     exact: true,
     component: ROUTES_MAP.temp.component,
   },
+  {
+    path: '/settings',
+    key: ROUTES_MAP.settings.key,
+    exact: false,
+    component: ROUTES_MAP.settings.component,
+  },
 ];
 
-export { RoutesConfig };
+const SubRoutesConfig = [
+  {
+    path: '/1',
+    key: 'settings/1',
+    component: ROUTES_MAP.singUp.component,
+  },
+  {
+    path: '/2',
+    key: 'settings/2',
+    component: ROUTES_MAP.temp.component,
+  },
+];
+
+export { RoutesConfig, SubRoutesConfig };

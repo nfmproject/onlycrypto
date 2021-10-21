@@ -21,6 +21,7 @@ function Temp({ ...props }: any) {
   }
 
   function fetchProfile() {
+    // @ts-ignore
     ceramic.readData('kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52');
   }
 
@@ -39,13 +40,11 @@ function Temp({ ...props }: any) {
       profile,
     );
   }
-
   function ceramicJWS() {
     ceramic.createJWS('payload').then((val) => {
       console.log(JSON.stringify(val));
     });
   }
-
   return (
     <div className={styles.main}>
       <AuthButton />
