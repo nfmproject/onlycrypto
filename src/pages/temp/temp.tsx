@@ -40,11 +40,6 @@ function Temp({ ...props }: any) {
       profile,
     );
   }
-  function ceramicJWS() {
-    ceramic.createJWS('payload').then((val) => {
-      console.log(JSON.stringify(val));
-    });
-  }
   return (
     <div className={styles.main}>
       <AuthButton />
