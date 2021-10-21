@@ -1,6 +1,7 @@
-import Home from '../pages/home/home';
 import SignUp from '../pages/signup/singup';
 import Temp from '../pages/temp/temp';
+import Settings from '../pages/settings/settings';
+import Home from '../pages/home/home';
 
 export const ROUTES_MAP = {
   home: {
@@ -17,5 +18,10 @@ export const ROUTES_MAP = {
     component: Temp,
     path: '/temp',
     key: 'TEMP',
+  },
+  settings: {
+    component: Settings,
+    path: '/setting',
+    key: 'SETTINGS',
   },
 };

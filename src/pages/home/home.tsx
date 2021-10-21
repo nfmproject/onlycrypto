@@ -1,10 +1,11 @@
-import React from 'react';
+import { Button } from '@mui/material';
 import { Sidebar } from '../../components/Sidebar';
+import TweetBox  from '../whatshappeningbar/TweetBox';
 
-function Home({ ...props }: any) {
+function Home() {
   return (
     <div>
-      <Sidebar />
+      <TweetBox />
     </div>
   );
 }
