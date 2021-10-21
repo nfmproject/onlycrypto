@@ -1,9 +1,10 @@
+import { Button } from '@mui/material';
 import { Sidebar } from '../../components/Sidebar';
 
 function Home() {
   return (
     <div>
-      <Sidebar />
+      <h1>Hello World</h1>
     </div>
   );
 }

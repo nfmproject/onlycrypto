@@ -14,6 +14,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import PersonIcon from '@mui/icons-material/Person';
+import SettingsIcon from '@mui/icons-material/Settings';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import styles from './Sidebar.module.css';
 import { Button } from '@mui/material';
@@ -44,21 +45,19 @@ const defaultState = [
     inactiveIcon: MailOutlineIcon,
     activeIcon: MailRoundedIcon,
     active: false,
-    path: '/settings/1',
   },
   {
     text: 'Bookmarks',
     inactiveIcon: BookmarkBorderIcon,
     activeIcon: BookmarkIcon,
     active: false,
-    path: '/settings/2',
   },
   {
-    text: 'Lists',
-    inactiveIcon: ListAltIcon,
-    activeIcon: ViewListIcon,
+    text: 'Settings',
+    inactiveIcon: SettingsIcon,
+    activeIcon: SettingsIcon,
     active: false,
-    path: '/settings',
+    path: '/settings/1',
   },
   {
     text: 'Profile',

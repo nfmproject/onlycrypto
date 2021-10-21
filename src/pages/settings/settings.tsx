@@ -4,10 +4,6 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 
 function Settings({ ...props }: any) {
   const history = useHistory();
-  useEffect(() => {
-    history.push('/settings/1');
-  }, []);
-
   return (
     <>
       <div
