@@ -10,8 +10,6 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import Fortmatic from "fortmatic";
 import Torus from "@toruslabs/torus-embed";
 import Web3 from "web3";
-
-import { useUserAddress } from 'eth-hooks';
 import { useRecoilState } from 'recoil';
 import { AuthStatus, basicAuthState } from './state/authStates';
 import { TileDocument } from '@ceramicnetwork/stream-tile';
