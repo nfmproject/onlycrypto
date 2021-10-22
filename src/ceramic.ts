@@ -4,7 +4,6 @@ import CeramicClient from '@ceramicnetwork/http-client';
 import { DID } from 'dids';
 import KeyDidResolver from 'key-did-resolver';
 import ThreeIdResolver from '@ceramicnetwork/3id-did-resolver';
-import { StaticJsonRpcProvider, Web3Provider } from '@ethersproject/providers';
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import Fortmatic from "fortmatic";
