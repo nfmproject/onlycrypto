@@ -40,13 +40,17 @@ function Temp({ ...props }: any) {
       profile,
     );
   }
-
+  function ceramicJWS() {
+    ceramic.createJWS('payload').then((val) => {
+      console.log(JSON.stringify(val));
+    });
+  }
   return (
     <div className={styles.main}>
       <AuthButton />
       <Button onClick={submitProfile}>Upload Profile</Button>
       <Button onClick={fetchProfile}>Fetch Profile</Button>
-      <Button onClick={updateProfile}>Update Profile</Button>
+      <Button onClick={ceramicJWS}>Update Profile</Button>
     </div>
   );
 }

@@ -20,6 +20,7 @@ export interface CeramicType {
   ) => Promise<TileDocument<object> | 'error'>;
   readData: (streamId: string) => Promise<any>;
   updateData: (streamId: string, data: object) => Promise<any>;
+  createJWS: (payload: string) => Promise<object>;
   authState: AuthStatus;
 }
 
@@ -138,12 +139,23 @@ export default function CeramicAuth() {
     }
   };
 
+  const createJWS = async (payload: string) => {
+    if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
+      const token = await ceramic.did.createJWS(payload);
+      return { payload: token.payload, signatures: token.signatures };
+    } else {
+      console.error('no ceramic did or busy');
+      return { error: 'Authenticate first' };
+    }
+  };
+
   return {
     authenticate,
     resetDid,
     createData,
     readData,
     updateData,
+    createJWS,
     authState,
   };
 }
