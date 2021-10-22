@@ -2,11 +2,11 @@ import React from "react";
 import { Form } from "usetheform"; 
 // import { Form, useForm } from "usetheform"; in case of using ReactJsonViewer()
 // import JSONTree from "react-json-tree";
-import { WhatsHappeningBar } from "../../components/WhatsHappeningBar/WhatsHappeningBar";
-import { Preview } from "../../components/Preview/Preview";
-import { UploadMediaBar } from "../../components/UploadMediaBar/UploadMediaBar";
-import { Submit } from "../../components/Submit/Submit";
-import { CharacterCounter } from "../../components/CharacterCounter/CharacterCounter";
+import { WhatsHappeningBar } from "../WhatsHappeningBar/WhatsHappeningBar";
+import { Preview } from "../Preview/Preview";
+import { UploadMediaBar } from "../UploadMediaBar/UploadMediaBar";
+import { Submit } from "../../Submit/Submit";
+import { CharacterCounter } from "../CharacterCounter/CharacterCounter";
 import "./TweetBox.css";
 
 const MAX_CHARS_ALLOWED = 50;

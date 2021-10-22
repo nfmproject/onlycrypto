@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "usetheform";
 import { EditorState, Modifier } from "draft-js";
-import EmojiSVG from "./../../../../assets/emojipicker.svg";
+import EmojiSVG from "./../../../../../assets/emojipicker.svg";
 import Picker from "emoji-picker-react";
 import "./Styles.css";
 
