@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "usetheform";
-import AnchorSVG from "./../../../assets/anchor.svg";
+import AnchorSVG from "./../../../../assets/anchor.svg";
 import { getPreview } from "./utils/getPreview";
 import "./Styles.css";
 

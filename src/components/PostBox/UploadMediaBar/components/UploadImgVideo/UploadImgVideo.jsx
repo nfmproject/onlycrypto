@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from "usetheform";
-import UpladImgSVG from "./../../../../assets/uploadimages.svg";
+import UpladImgSVG from "./../../../../../assets/uploadimages.svg";
 import "./Styles.css";
 
 export const UploadImgVideo = ({ disabled }) => {

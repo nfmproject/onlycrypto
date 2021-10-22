@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useField } from "usetheform";
-import UpladGifSVG from "./../../../../assets/gifupload.svg";
-import ArrowBackSVG from "./../../../../assets/arrowback.svg";
+import UpladGifSVG from "./../../../../../assets/gifupload.svg";
+import ArrowBackSVG from "./../../../../../assets/arrowback.svg";
 import { Grid } from "@giphy/react-components";
 import { GiphyFetch } from "@giphy/js-fetch-api";
 import "./Styles.css";
