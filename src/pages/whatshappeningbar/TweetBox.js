@@ -5,7 +5,6 @@ import { Form } from "usetheform";
 import { WhatsHappeningBar } from "../../components/WhatsHappeningBar/WhatsHappeningBar";
 import { Preview } from "../../components/Preview/Preview";
 import { UploadMediaBar } from "../../components/UploadMediaBar/UploadMediaBar";
-import { PrivacyPicker } from "../../components/PrivacyPicker/PrivacyPicker";
 import { Submit } from "../../components/Submit/Submit";
 import { CharacterCounter } from "../../components/CharacterCounter/CharacterCounter";
 import "./TweetBox.css";
@@ -18,7 +17,6 @@ export default function App() {
       <Form onSubmit={onSubmit}>
         <WhatsHappeningBar maxChars={MAX_CHARS_ALLOWED} />
         <Preview />
-        <PrivacyPicker />
         <span className="ThematicBreak" />
         <div className="ActionBar">
           <UploadMediaBar />
