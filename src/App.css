@@ -8,9 +8,15 @@
   --outline-color: 47 51 54;
 }
 
-.app {
+/* use these margins at specific page level for a cleaner layout  */
+/* .app {
   display: flex;
   min-height: 100vh;
   max-width: 1280px;
+  margin: 0 auto;
+} */
+.app {
+  display: flex;
+  min-height: 100vh;
   margin: 0 auto;
 }
