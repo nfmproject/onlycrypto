@@ -3,6 +3,11 @@ import CeramicClient from '@ceramicnetwork/http-client';
 import { DID } from 'dids';
 import KeyDidResolver from 'key-did-resolver';
 import ThreeIdResolver from '@ceramicnetwork/3id-did-resolver';
+import Web3Modal from 'web3modal';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import Fortmatic from "fortmatic";
+import Torus from "@toruslabs/torus-embed";
+import Web3 from "web3";
 import { useRecoilState } from 'recoil';
 import { AuthStatus, basicAuthState } from './state/authStates';
 import { TileDocument } from '@ceramicnetwork/stream-tile';
@@ -24,9 +29,45 @@ export interface CeramicType {
   authState: AuthStatus;
 }
 
+/*
+   Web3 modal helps us "connect" external wallets:
+ */
+   const web3Modal = new Web3Modal({
+    network: "mainnet", // optional
+    cacheProvider: true, // optional
+    providerOptions: {
+      walletconnect: {
+        package: WalletConnectProvider, // required
+        options: {
+          infuraId: "19b2294ebe0247a5a7beb92164520320", // nft-market infura id
+        },
+      },
+      fortmatic: {
+        package: Fortmatic,
+        options: {
+          // Mikko's TESTNET api key
+          key: "pk_test_391E26A3B43A3350"
+        }
+      },
+      torus: {
+        package: Torus
+      },
+    },
+  });
+
 export default function CeramicAuth() {
   const [authState, setAuthState] = useRecoilState(basicAuthState);
   const [getCeramicState, setCeramicState] = useRecoilState(ceramicState);
+
+  /**
+  * Logout for web3
+  */
+  const logoutOfWeb3Modal = async () => {
+    await web3Modal.clearCachedProvider();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1);
+  };
 
   /**
    * Authenticates ceramic using 3id
@@ -36,11 +77,16 @@ export default function CeramicAuth() {
     switch (authState) {
       case AuthStatus.PENDING:
         setAuthState(AuthStatus.LOADING);
-        const addresses = await window.ethereum.enable();
-        const threeIdConnect = new ThreeIdConnect();
-        const authProvider = new EthereumAuthProvider(window.ethereum, addresses[0]);
-        await threeIdConnect.connect(authProvider);
-        const provider = await threeIdConnect.getDidProvider();
+        
+        const web3modalProvider = await web3Modal.connect();
+        const web3 = new Web3(web3modalProvider);
+
+        const threeIdConnect = new ThreeIdConnect()
+        const temp = new Web3(web3.currentProvider);
+        const addresses = await temp.eth.getAccounts()
+        const authProvider = new EthereumAuthProvider(web3.currentProvider, addresses[0])
+        await threeIdConnect.connect(authProvider)
+        const provider = await threeIdConnect.getDidProvider()
 
         const resolver = {
           ...KeyDidResolver.getResolver(),
