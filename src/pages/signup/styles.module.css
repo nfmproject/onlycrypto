@@ -1,7 +1,8 @@
 @import '../../App.css';
 
 .main {
-  @apply flex flex-col space-y-6 items-center;
+  /* @apply flex flex-col space-y-6 items-center; */
+  @apply grid grid-cols-12;
   @apply cursor-pointer;
   @apply rounded-full;
   @apply text-text-primary !important;
@@ -9,11 +10,50 @@
   @apply bg-background-primary;
   @apply w-screen;
 }
+.logo {
+  background: url(../../logoBlack.svg);
+  width: 67px;
+  height: 65px;
+  @apply mb-6 bg-center bg-no-repeat bg-contain;
+}
+
+.col1 {
+  background: url(../../signUpHero.png);
+  @apply col-span-7 bg-center bg-no-repeat bg-cover;
+}
+
+.col2 {
+  background: #ece9e6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #ece9e6, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #ece9e6,
+    #ffffff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  @apply col-span-5 p-10 flex flex-col justify-center;
+}
 
 .input {
   @apply hidden;
 }
 
+.inputFields {
+  width: 345px;
+  @apply mb-5;
+}
+
 .avatar {
   @apply h-24;
 }
+
+.submitButton {
+  width: 345px;
+  @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-14 rounded-full;
+}
+
+.spanContainer {
+  width: 345px;
+  @apply flex justify-center;
+}
+
+/* <a href="https://www.freepik.com/photos/background">Background photo created by rawpixel.com - www.freepik.com</a>TV */
