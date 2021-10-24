@@ -40,6 +40,7 @@ function Temp({ ...props }: any) {
       profile,
     );
   }
+
   return (
     <div className={styles.main}>
       <AuthButton />
