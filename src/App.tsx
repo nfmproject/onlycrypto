@@ -6,6 +6,7 @@ import { history, RenderRoutes, RoutesConfig } from './routing';
 import { Modals } from './modals';
 import { Router } from 'react-router-dom';
 import { Sidebar } from './components/Sidebar';
+import { Button } from '@mui/material';
 
 // import CeramicAuth from './ceramic';
 
@@ -24,9 +25,11 @@ export default function App() {
 }
 
 function AppContent() {
+
+  const render = history.location.pathname == '/signup'
   return (
     <React.Fragment>
-      <Sidebar />
+      <Sidebar/>
       <RenderRoutes routes={RoutesConfig} />
       <Modals />
     </React.Fragment>
