@@ -1,20 +1,18 @@
-import stringify from "json-stable-stringify";
-import urlcat from "urlcat";
+import stringify from 'json-stable-stringify';
+import urlcat from 'urlcat';
 
-
-const serverEndpoint = 'http://localhost:5000'
+const serverEndpoint = 'http://localhost:5000';
 
 export const getUsername = async (data: unknown) => {
-    const response = await fetch(urlcat(serverEndpoint, 'profile/user'), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: stringify(data),
-    })
-    return response
-}
-
+  const response = await fetch(urlcat(serverEndpoint, 'profile/user'), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: stringify(data),
+  });
+  return response;
+};
 
 /**
  * 
@@ -30,16 +28,15 @@ export const getUsername = async (data: unknown) => {
  */
 
 export const createUser = async (data: unknown) => {
-    const response = await fetch(urlcat(serverEndpoint, 'profile/createUser'), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: stringify(data),
-    })
-    return response
-}
-
+  const response = await fetch(urlcat(serverEndpoint, 'profile/createUser'), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: stringify(data),
+  });
+  return response;
+};
 
 /**
  * 
@@ -53,12 +50,12 @@ export const createUser = async (data: unknown) => {
  * @returns 
  */
 export const createPost = async (data: unknown) => {
-    const response = await fetch(urlcat(serverEndpoint, 'profile/createPost'), {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: stringify(data),
-    })
-    return response
-}
+  const response = await fetch(urlcat(serverEndpoint, 'profile/createPost'), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: stringify(data),
+  });
+  return response;
+};

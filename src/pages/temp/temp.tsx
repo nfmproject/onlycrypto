@@ -47,50 +47,43 @@ function Temp({ ...props }: any) {
     });
   }
 
-
   function registerUser() {
-    const signature = localStorage.getItem('did_signature')
-    const user_did = localStorage.getItem('user_did')
+    const signature = localStorage.getItem('did_signature');
+    const user_did = localStorage.getItem('user_did');
     if (!!signature) {
-
       const payload = {
         did: user_did,
         userName: 'iamzubin',
         ceramicHash: 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52',
-        did_sign: JSON.parse(signature)
-
-
-      }
-      createUser(payload)
+        did_sign: JSON.parse(signature),
+      };
+      createUser(payload);
     }
-
   }
 
   function fetchUser() {
-    const user_did = localStorage.getItem('user_did')
-    getUsername({ requested_did: user_did }).then((res) => res.json())
-    .then((res) => {
-      console.log(res[0].username)
-      console.log(res[0].ceramic_hash)
-    })
+    const user_did = localStorage.getItem('user_did');
+    getUsername({ requested_did: user_did })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res[0].username);
+        console.log(res[0].ceramic_hash);
+      });
   }
 
   function createPostCall() {
-    const user_did = localStorage.getItem('user_did')
-    const cearmic_payload = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52'
-    const signature = localStorage.getItem('did_signature')
-    if(!!user_did && !!signature){
-
+    const user_did = localStorage.getItem('user_did');
+    const cearmic_payload = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
+    const signature = localStorage.getItem('did_signature');
+    if (!!user_did && !!signature) {
       const payload = {
-        did : user_did,
-        post_hash : cearmic_payload,
-        did_sign : JSON.parse(signature)
-      }
-      createPost(payload)
+        did: user_did,
+        post_hash: cearmic_payload,
+        did_sign: JSON.parse(signature),
+      };
+      createPost(payload);
     }
-
   }
-
 
   return (
     <div className={styles.main}>
