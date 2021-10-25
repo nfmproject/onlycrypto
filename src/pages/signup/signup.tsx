@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 import { PasswordInput, PwdState } from '../../components/formInput/passwordInput';
 // check if avatar picker is needed or not
 import { AvatarPicker } from '../../components/avatarPicker';
+import styleFunctionSx from '@mui/system/styleFunctionSx';
 
 function SignUp({ ...props }: any) {
   const [username, setUsername] = useState<string>('');
@@ -37,8 +38,8 @@ function SignUp({ ...props }: any) {
           <AvatarPicker avatar={avatar} changeHandler={changeHandler} />
         </div> */}
         <div className={styles.logo}></div>
-        <div className="mb-12">
-          <span className="font-extrabold text-6xl">Join NFM today.</span>
+        <div className={styles.headingContainer}>
+          <span className={styles.heading}>Join NFM today.</span>
         </div>
         <div className={styles.inputFields}>
           <FormInput

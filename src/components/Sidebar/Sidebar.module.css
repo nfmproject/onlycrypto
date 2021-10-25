@@ -1,6 +1,7 @@
 @import '../../App.css';
 
 .sidebar {
+  display: none;
   flex: 0.2;
   min-width: 220px;
   @apply sticky;

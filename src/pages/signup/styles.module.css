@@ -1,7 +1,6 @@
 @import '../../App.css';
 
 .main {
-  /* @apply flex flex-col space-y-6 items-center; */
   @apply grid grid-cols-12;
   @apply cursor-pointer;
   @apply rounded-full;
@@ -12,25 +11,30 @@
 }
 .logo {
   background: url(../../logoBlack.svg);
-  width: 67px;
-  height: 65px;
-  @apply mb-6 bg-center bg-no-repeat bg-contain;
+  @apply mb-10 mt-6 lg:mb-6 lg:mt-0 w-20 h-20;
+  @apply bg-center bg-no-repeat bg-contain;
+}
+
+.headingContainer {
+  @apply lg:mb-12 mb-9 lg:mb-6;
+}
+
+.heading {
+  @apply font-extrabold text-4xl lg:text-6xl;
 }
 
 .col1 {
   background: url(../../signUpHero.png);
-  @apply col-span-7 bg-center bg-no-repeat bg-cover;
+  @apply col-span-7;
+  @apply bg-center bg-no-repeat bg-cover hidden lg:block;
 }
 
 .col2 {
-  background: #ece9e6; /* fallback for old browsers */
+  background: #ece9e6;
   background: -webkit-linear-gradient(to bottom, #ece9e6, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #ece9e6,
-    #ffffff
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  @apply col-span-5 p-10 flex flex-col justify-center;
+  background: linear-gradient(to bottom, #ece9e6, #ffffff);
+  @apply col-span-12 lg:col-span-5;
+  @apply p-10 flex flex-col justify-start lg:justify-center items-center lg:items-start;
 }
 
 .input {
