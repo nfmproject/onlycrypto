@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "usetheform";
-import { readFileAsDataURL } from "./utils/readFileAsDataURL";
-import "./Styles.css";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'usetheform';
+import { readFileAsDataURL } from './utils/readFileAsDataURL';
+import './Styles.css';
 
 export const PreviewMedia = () => {
   const [previews, setPreviews] = useState(() => []);
@@ -32,8 +32,8 @@ export const PreviewMedia = () => {
               type="button"
               onClick={() => removeMedia(idMedia)}
             />
-            {type === "video" && <video controls loop playsInline src={src} />}
-            {type === "image" && <img alt={idMedia} src={src} />}
+            {type === 'video' && <video controls loop playsInline src={src} />}
+            {type === 'image' && <img alt={idMedia} src={src} />}
           </div>
         </div>
       ))}

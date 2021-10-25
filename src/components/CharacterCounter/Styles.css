@@ -3,10 +3,10 @@
   will-change: transform;
 }
 
-.ProgressRingBar[data-ui="smallRing"] {
+.ProgressRingBar[data-ui='smallRing'] {
   transform: scale(0.8);
 }
 
-.ProgressRingBar[data-ui="bigRing"] {
+.ProgressRingBar[data-ui='bigRing'] {
   transform: scale(1);
 }

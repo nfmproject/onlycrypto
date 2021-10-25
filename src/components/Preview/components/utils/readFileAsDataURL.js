@@ -3,12 +3,12 @@ export const readFileAsDataURL = (mediaFiles = []) =>
     (media) =>
       new Promise((resolve, reject) => {
         let mediaReader = new FileReader();
-        const type = media?.type?.split("/")[0] || "unknown";
+        const type = media?.type?.split('/')[0] || 'unknown';
         mediaReader.onloadend = () => {
           const newMedia = {
             idMedia: media.name,
             src: mediaReader.result,
-            type
+            type,
           };
           resolve(newMedia);
         };
@@ -17,5 +17,5 @@ export const readFileAsDataURL = (mediaFiles = []) =>
           mediaReader.abort();
         };
         mediaReader.readAsDataURL(media);
-      })
+      }),
   );

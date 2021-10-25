@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 export const ProgressRingBar = ({
   textLabel,
-  colorBar = "#1da1f2",
+  colorBar = '#1da1f2',
   radius = 20,
   stroke = 2,
   progress = 0,
-  hideRingBar
+  hideRingBar,
 }) => {
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
@@ -21,7 +21,7 @@ export const ProgressRingBar = ({
             stroke="#ebeef0"
             fill="transparent"
             strokeWidth={stroke}
-            strokeDasharray={circumference + " " + circumference}
+            strokeDasharray={circumference + ' ' + circumference}
             r={normalizedRadius}
             cx={radius}
             cy={radius}
@@ -30,7 +30,7 @@ export const ProgressRingBar = ({
             stroke={colorBar}
             fill="transparent"
             strokeWidth={stroke}
-            strokeDasharray={circumference + " " + circumference}
+            strokeDasharray={circumference + ' ' + circumference}
             r={normalizedRadius}
             style={{ strokeDashoffset }}
             cx={radius}

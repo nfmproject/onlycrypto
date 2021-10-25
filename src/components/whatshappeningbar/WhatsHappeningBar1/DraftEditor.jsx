@@ -1,23 +1,20 @@
-import React, { useCallback, useMemo, useRef } from "react";
-import { composeDecorators } from "./utils/composeDecorators";
-import { useField } from "usetheform";
-import { Editor, EditorState } from "draft-js";
+import React, { useCallback, useMemo, useRef } from 'react';
+import { composeDecorators } from './utils/composeDecorators';
+import { useField } from 'usetheform';
+import { Editor, EditorState } from 'draft-js';
 
-export const DraftEditor = ({ maxChars, name = "editorState" }) => {
-  const initialState = useMemo(
-    () => EditorState.createEmpty(composeDecorators(maxChars)),
-    [maxChars]
-  );
+export const DraftEditor = ({ maxChars, name = 'editorState' }) => {
+  const initialState = useMemo(() => EditorState.createEmpty(composeDecorators(maxChars)), [
+    maxChars,
+  ]);
 
   const { value, setValue } = useField({
-    type: "custom",
+    type: 'custom',
     name,
-    value: initialState
+    value: initialState,
   });
 
-  const onInputChange = useCallback((editorState) => setValue(editorState), [
-    setValue
-  ]);
+  const onInputChange = useCallback((editorState) => setValue(editorState), [setValue]);
 
   /* 
      field used to hold the draft's ref 
@@ -26,9 +23,9 @@ export const DraftEditor = ({ maxChars, name = "editorState" }) => {
   */
   const refEditor = useRef(null);
   useField({
-    type: "custom",
-    name: "refEditor",
-    value: refEditor
+    type: 'custom',
+    name: 'refEditor',
+    value: refEditor,
   });
 
   return (

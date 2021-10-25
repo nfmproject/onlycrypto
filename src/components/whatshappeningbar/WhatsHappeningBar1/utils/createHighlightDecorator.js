@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const createHighlightDecorator = (regex) => {
   function hashTagStrategy(contentBlock, callback) {
@@ -12,7 +12,7 @@ export const createHighlightDecorator = (regex) => {
 
   return {
     strategy: hashTagStrategy,
-    component: HashTag
+    component: HashTag,
   };
 };
 

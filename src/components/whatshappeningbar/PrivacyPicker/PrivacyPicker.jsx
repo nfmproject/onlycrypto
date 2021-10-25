@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Input, useSelector } from "usetheform";
+import React, { useState, useEffect, useRef } from 'react';
+import { Input, useSelector } from 'usetheform';
 
-import WorlSVG from "./../../../assets/world.svg";
-import PrivacySVG_0 from "./../../../assets/privacy-world.svg";
-import PrivacySVG_1 from "./../../../assets/privacy-following.svg";
-import PrivacySVG_2 from "./../../../assets/privacy-mentioned.svg";
+import WorlSVG from './../../../assets/world.svg';
+import PrivacySVG_0 from './../../../assets/privacy-world.svg';
+import PrivacySVG_1 from './../../../assets/privacy-following.svg';
+import PrivacySVG_2 from './../../../assets/privacy-mentioned.svg';
 
-import "./Styles.css";
+import './Styles.css';
 
 const labels = {
-  0: "Everyone",
-  1: "People you follow",
-  2: "Only people you mention"
+  0: 'Everyone',
+  1: 'People you follow',
+  2: 'Only people you mention',
 };
 
 export const PrivacyPicker = () => {
@@ -64,14 +64,7 @@ export const PrivacyPicker = () => {
   );
 };
 
-function RadioWithLabel({
-  id,
-  img,
-  name = "postPrivacy",
-  children,
-  value,
-  checked
-}) {
+function RadioWithLabel({ id, img, name = 'postPrivacy', children, value, checked }) {
   return (
     <div className="RadioWithLabel">
       <Input type="radio" id={id} name={name} value={value} checked={checked} />
@@ -91,9 +84,9 @@ const useClickOutPicker = (cb) => {
         cb(e);
       }
     };
-    window.addEventListener("click", clickOut);
+    window.addEventListener('click', clickOut);
     return () => {
-      window.removeEventListener("click", clickOut);
+      window.removeEventListener('click', clickOut);
     };
   }, [cb]);
   return ref;

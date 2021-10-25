@@ -1,9 +1,9 @@
-import React from "react";
-import { useForm } from "usetheform";
-import { PreviewURL } from "./components/PreviewURL";
-import { PreviewMedia } from "./components/PreviewMedia";
-import { PeviewGif } from "./components/PeviewGif";
-import "./Styles.css";
+import React from 'react';
+import { useForm } from 'usetheform';
+import { PreviewURL } from './components/PreviewURL';
+import { PreviewMedia } from './components/PreviewMedia';
+import { PeviewGif } from './components/PeviewGif';
+import './Styles.css';
 
 export const Preview = () => {
   const { state } = useForm();

@@ -25,8 +25,7 @@ export default function App() {
 }
 
 function AppContent() {
-
-  const render = history.location.pathname == '/signup'
+  const render = history.location.pathname == '/signup';
   return (
     <React.Fragment>
       <Sidebar />

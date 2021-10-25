@@ -1,4 +1,4 @@
-const colors = { warning: "#ffad1f", error: "#e0245e", success: "#1da1f2" };
+const colors = { warning: '#ffad1f', error: '#e0245e', success: '#1da1f2' };
 export function getColors(numOfChars, max, warning) {
   switch (true) {
     case numOfChars >= 0 && numOfChars < max - warning: {
