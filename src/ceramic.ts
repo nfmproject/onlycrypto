@@ -27,6 +27,7 @@ export interface CeramicType {
   updateData: (streamId: string, data: object) => Promise<any>;
   createJWS: (payload: string) => Promise<object>;
   authState: AuthStatus;
+  logoutOfWeb3Modal: () => Promise<void>
 }
 
 /*
@@ -64,6 +65,8 @@ export default function CeramicAuth() {
    */
   const logoutOfWeb3Modal = async () => {
     await web3Modal.clearCachedProvider();
+    localStorage.clear()
+    setAuthState(AuthStatus.PENDING)
     setTimeout(() => {
       window.location.reload();
     }, 1);
@@ -75,6 +78,7 @@ export default function CeramicAuth() {
    */
   const authenticate = async () => {
     switch (authState) {
+      case AuthStatus.SOFT:
       case AuthStatus.PENDING:
         setAuthState(AuthStatus.LOADING);
 
@@ -99,6 +103,7 @@ export default function CeramicAuth() {
         ceramic.did
           .authenticate()
           .then((res) => {
+            localStorage.setItem('user_did', ceramic.did?.id || '')
             setAuthState(AuthStatus.AUTHENTICATED);
           })
           .catch(() => {
@@ -197,6 +202,7 @@ export default function CeramicAuth() {
 
   return {
     authenticate,
+    logoutOfWeb3Modal,
     resetDid,
     createData,
     readData,
