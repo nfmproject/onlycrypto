@@ -97,28 +97,33 @@ function Sidebar() {
     setSidebarStates(newState);
     history.push(path);
   }
+  const render = history.location.pathname == '/signup'
 
   return (
-    <div className={styles.sidebar}>
-      <div className={styles.topSide}>
-        <div className={styles.logoWrapper}>
-          <TwitterIcon className={styles.logo} />
-        </div>
-        {SidebarStates.map((SidebarState, idx) => (
-          <SidebarOption
-            key={idx}
-            text={SidebarState.text}
-            inactiveIcon={SidebarState.inactiveIcon}
-            activeIcon={SidebarState.activeIcon}
-            active={SidebarState.active}
-            handleOnClick={setActiveState}
-          />
-        ))}
-        <Button className={styles.sidebarPost} onClick={theme.toggleTheme}>
-          Post
-        </Button>
-      </div>
-      <div className="bottomSide"></div>
+    <div>
+      {render ? <a />
+        :
+        <div className={styles.sidebar}>
+          <div className={styles.topSide}>
+            <div className={styles.logoWrapper}>
+              <TwitterIcon className={styles.logo} />
+            </div>
+            {SidebarStates.map((SidebarState, idx) => (
+              <SidebarOption
+                key={idx}
+                text={SidebarState.text}
+                inactiveIcon={SidebarState.inactiveIcon}
+                activeIcon={SidebarState.activeIcon}
+                active={SidebarState.active}
+                handleOnClick={setActiveState}
+              />
+            ))}
+            <Button className={styles.sidebarPost} onClick={theme.toggleTheme}>
+              Post
+            </Button>
+          </div>
+          <div className="bottomSide"></div>
+        </div>}
     </div>
   );
 }
