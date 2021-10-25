@@ -1,19 +1,19 @@
-import React from "react";
-import { Form } from "usetheform"; 
+import React from 'react';
+import { Form } from 'usetheform';
 // import { Form, useForm } from "usetheform"; in case of using ReactJsonViewer()
 // import JSONTree from "react-json-tree";
-import { WhatsHappeningBar } from "../WhatsHappeningBar/WhatsHappeningBar";
-import { Preview } from "../Preview/Preview";
-import { UploadMediaBar } from "../UploadMediaBar/UploadMediaBar";
-import { Submit } from "../../Submit/Submit";
-import { CharacterCounter } from "../CharacterCounter/CharacterCounter";
-import "./TweetBox.css";
+import { WhatsHappeningBar } from '../WhatsHappeningBar/WhatsHappeningBar';
+import { Preview } from '../Preview/Preview';
+import { UploadMediaBar } from '../UploadMediaBar/UploadMediaBar';
+import { Submit } from '../../Submit/Submit';
+import { CharacterCounter } from '../CharacterCounter/CharacterCounter';
+import './TweetBox.css';
 
 const MAX_CHARS_ALLOWED = 50;
 
 export default function App() {
   return (
-    <div className="App"> 
+    <div className="App">
       <Form onSubmit={onSubmit}>
         <WhatsHappeningBar maxChars={MAX_CHARS_ALLOWED} />
         <Preview />
@@ -40,6 +40,6 @@ async function onSubmit(state) {
     editor: { plainText },
     ...resState
   } = state;
-  console.log("onSubmit  => ", { ...resState, plainText });
+  console.log('onSubmit  => ', { ...resState, plainText });
   return true;
 }

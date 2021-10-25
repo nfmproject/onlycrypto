@@ -67,7 +67,7 @@
 
 .Preview__CloseBtn::after,
 .Preview__CloseBtn::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 50%;
   top: 50%;

@@ -39,7 +39,7 @@
   background-color: white;
 }
 
-.PrivacySelection[data-visible="true"] {
+.PrivacySelection[data-visible='true'] {
   height: auto;
   width: 100%;
   padding: 10px 0;
@@ -71,12 +71,12 @@
   flex-shrink: 0;
 }
 
-.RadioWithLabel input[type="radio"] {
+.RadioWithLabel input[type='radio'] {
   display: none;
 }
 
-.RadioWithLabel input[type="radio"]:checked + label::after {
-  content: "✓";
+.RadioWithLabel input[type='radio']:checked + label::after {
+  content: '✓';
   position: absolute;
   color: rgb(27, 149, 224);
   border-radius: 50%;

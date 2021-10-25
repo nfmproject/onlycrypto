@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "usetheform";
-import AnchorSVG from "./../../../../assets/anchor.svg";
-import { getPreview } from "./utils/getPreview";
-import "./Styles.css";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'usetheform';
+import AnchorSVG from './../../../../assets/anchor.svg';
+import { getPreview } from './utils/getPreview';
+import './Styles.css';
 
 export const PreviewURL = () => {
   const [previewCard, setPreview] = useState(() => null);
   const [enablePreview, setEnablePreview] = useState(() => true);
-  const [plainText = ""] = useSelector((state) => state.editor.plainText);
+  const [plainText = ''] = useSelector((state) => state.editor.plainText);
 
   useEffect(() => {
     let cancel = false;
@@ -30,11 +30,7 @@ export const PreviewURL = () => {
   return (
     <div className="PreviewURL">
       <div className="PreviewURL__Img">
-        <button
-          className="Preview__CloseBtn"
-          type="button"
-          onClick={disablePreview}
-        />
+        <button className="Preview__CloseBtn" type="button" onClick={disablePreview} />
         <img alt={title.string_value} src={player_image.image_value.url} />
       </div>
       <div className="PreviewURL__Content">

@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "usetheform";
-import { EditorState, Modifier } from "draft-js";
-import EmojiSVG from "./../../../../assets/emojipicker.svg";
-import Picker from "emoji-picker-react";
-import "./Styles.css";
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'usetheform';
+import { EditorState, Modifier } from 'draft-js';
+import EmojiSVG from './../../../../assets/emojipicker.svg';
+import Picker from 'emoji-picker-react';
+import './Styles.css';
 
 export const EmojiPicker = ({ disabled }) => {
   const [showEmojiPicker, togglePicker] = useState(() => false);
@@ -15,14 +15,8 @@ export const EmojiPicker = ({ disabled }) => {
     const { editorState, refEditor } = editor;
     const contentState = editorState?.getCurrentContent();
     const targetRange = editorState?.getSelection();
-    const modifierAPI = targetRange.isCollapsed()
-      ? Modifier.insertText
-      : Modifier.replaceText;
-    const newContentState = modifierAPI(
-      contentState,
-      targetRange,
-      emojiObject.emoji
-    );
+    const modifierAPI = targetRange.isCollapsed() ? Modifier.insertText : Modifier.replaceText;
+    const newContentState = modifierAPI(contentState, targetRange, emojiObject.emoji);
     const newEditorState = EditorState.push(editorState, newContentState);
     setEditor((prev) => ({ ...prev, editorState: newEditorState }));
     toggleEmojiPicker();
@@ -60,9 +54,9 @@ const useClickOutPicker = (cb) => {
         cb(e);
       }
     };
-    window.addEventListener("click", clickOut);
+    window.addEventListener('click', clickOut);
     return () => {
-      window.removeEventListener("click", clickOut);
+      window.removeEventListener('click', clickOut);
     };
   }, [cb]);
   return ref;

@@ -111,8 +111,9 @@ export const getLocks = async <UnlockLocks>(_address1: String) => {
     address: _address1,
   };
 
-  const dataRes: Array<{ lock: { chain: number; name: string; price?: string; address: string } }> =
-    [];
+  const dataRes: Array<{
+    lock: { chain: number; name: string; price?: string; address: string };
+  }> = [];
 
   for (const key of Object.keys(graphEndpointKeyVal)) {
     const data = await graphQLClients[key].request(query, variables);

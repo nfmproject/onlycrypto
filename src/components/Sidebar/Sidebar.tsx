@@ -97,12 +97,13 @@ function Sidebar() {
     setSidebarStates(newState);
     history.push(path);
   }
-  const render = history.location.pathname == '/signup'
+  const render = history.location.pathname == '/signup';
 
   return (
     <div>
-      {render ? <a />
-        :
+      {render ? (
+        <a />
+      ) : (
         <div className={styles.sidebar}>
           <div className={styles.topSide}>
             <div className={styles.logoWrapper}>
@@ -123,7 +124,8 @@ function Sidebar() {
             </Button>
           </div>
           <div className="bottomSide"></div>
-        </div>}
+        </div>
+      )}
     </div>
   );
 }

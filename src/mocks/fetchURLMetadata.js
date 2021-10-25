@@ -1,4 +1,4 @@
-import response from "./response.json";
+import response from './response.json';
 
 // It mocks the api response of the twitter private api:
 // https://caps.twitter.com/v2/cards/preview.json
