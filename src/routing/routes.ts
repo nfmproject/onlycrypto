@@ -1,4 +1,4 @@
-import SignUp from '../pages/signup/singup';
+import SignUp from '../pages/signup/signup';
 import Temp from '../pages/temp/temp';
 import Settings from '../pages/settings/settings';
 import Home from '../pages/home/home';
@@ -9,7 +9,7 @@ export const ROUTES_MAP = {
     path: '/',
     key: 'ROOT',
   },
-  singUp: {
+  signUp: {
     component: SignUp,
     path: '/signup',
     key: 'SIGNUP',
