@@ -38,7 +38,7 @@ function AppContent() {
   const render = history.location.pathname == '/signup'
   return (
     <React.Fragment>
-      <Sidebar/>
+      <Sidebar />
       <RenderRoutes routes={RoutesConfig} />
       <Modals />
     </React.Fragment>

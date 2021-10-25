@@ -1,6 +1,8 @@
 import { decodeArrayBuffer, decodeText, encodeArrayBuffer, encodeText } from './lib/buffer';
 
-export async function encryptUnlockData(content: string): Promise<{
+export async function encryptUnlockData(
+  content: string,
+): Promise<{
   iv: string;
   key: string;
   encrypted: string;

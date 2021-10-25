@@ -26,6 +26,12 @@ function Temp({ ...props }: any) {
     ceramic.readData('kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52');
   }
 
+  function ceramicJWS() {
+    ceramic.createJWS('payload').then((val) => {
+      console.log(JSON.stringify(val));
+    });
+  }
+
   function updateProfile() {
     const profile: profileType = {
       username: 'iamzubin',
@@ -41,6 +47,7 @@ function Temp({ ...props }: any) {
       profile,
     );
   }
+
   function ceramicJWS() {
     ceramic.createJWS('payload').then((val) => {
       localStorage.setItem('did_signature', JSON.stringify(val));
@@ -90,7 +97,6 @@ function Temp({ ...props }: any) {
     }
 
   }
-
 
   return (
     <div className={styles.main}>
