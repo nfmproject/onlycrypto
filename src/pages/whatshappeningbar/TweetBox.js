@@ -7,7 +7,7 @@ import { Preview } from '../../components/Preview/Preview';
 import { UploadMediaBar } from '../../components/UploadMediaBar/UploadMediaBar';
 import { PrivacyPicker } from '../../components/PrivacyPicker/PrivacyPicker';
 import { Submit } from '../../components/Submit/Submit';
-import { CharacterCounter } from '../../components/CharacterCounter/CharacterCounter';
+import { CharacterCounter } from '../../components/PostBox/CharacterCounter/CharacterCounter';
 import './TweetBox.css';
 
 const MAX_CHARS_ALLOWED = 50;
