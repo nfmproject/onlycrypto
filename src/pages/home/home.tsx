@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { Sidebar } from '../../components/Sidebar';eetBox';
+import { Sidebar } from '../../components/Sidebar';
 import TweetBox  from '../whatshappeningbar/TweetBox';
 function Home() {
   return (
