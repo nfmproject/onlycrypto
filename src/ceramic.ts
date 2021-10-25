@@ -17,12 +17,9 @@ const ceramic = new CeramicClient('https://ceramic-clay.3boxlabs.com');
 
 // TODO : Ceramic breaks without persmissions, wrap into try catch
 export interface CeramicType {
-  authenticate: () => Promise<void>;
+  authenticate: () => Promise<boolean>;
   resetDid: () => Promise<void>;
-  createData: (
-    data: object,
-    schema?: string | undefined,
-  ) => Promise<TileDocument<object> | 'error'>;
+  createData: (data: object, schema?: string | undefined) => Promise<string>;
   readData: (streamId: string) => Promise<any>;
   updateData: (streamId: string, data: object) => Promise<any>;
   createJWS: (payload: string) => Promise<object>;
@@ -100,26 +97,27 @@ export default function CeramicAuth() {
         ceramic.did = did;
 
         ceramic.did.setProvider(provider);
-        ceramic.did
-          .authenticate()
-          .then((res) => {
+        const authed = await ceramic.did.authenticate();
+
+        if (!!authed) {
+          if (ceramic.did.authenticated) {
             localStorage.setItem('user_did', ceramic.did?.id || '');
             setAuthState(AuthStatus.AUTHENTICATED);
-          })
-          .catch(() => {
+          } else {
             alert('AuthFailed!!!');
             setAuthState(AuthStatus.FAILED);
-          });
-        return;
+          }
+        }
+        return ceramic.did.authenticated;
       case AuthStatus.LOADING:
         // TODO : modal to keep
         alert('please wait!!!');
-        return;
+        return false;
       case AuthStatus.AUTHENTICATED:
         alert('Already been authenticated 🎉 ');
-        return;
+        return false;
       default:
-        return;
+        return false;
     }
   };
   /**
@@ -134,7 +132,6 @@ export default function CeramicAuth() {
    * @returns document id
    */
   const createData = async (data: object, schema?: string, tagsData?: Array<string>) => {
-    console.log(ceramic.did?.id);
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.create(
         ceramic,
@@ -148,7 +145,7 @@ export default function CeramicAuth() {
         { pin: true },
       );
       console.log(doc.id.toString());
-      return doc;
+      return doc.id.toString();
     } else {
       console.log('no ceramic did or busy');
       return 'error';

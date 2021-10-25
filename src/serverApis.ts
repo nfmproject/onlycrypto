@@ -14,6 +14,17 @@ export const getUsername = async (data: unknown) => {
   return response;
 };
 
+export const getDid = async (data: unknown) => {
+  const response = await fetch(urlcat(serverEndpoint, 'profile/username'), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: stringify(data),
+  });
+  return response;
+};
+
 /**
  * 
  * @param data  =>
