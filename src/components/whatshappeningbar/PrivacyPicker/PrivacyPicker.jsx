@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Input, useSelector } from "usetheform";
 
-import WorlSVG from "./../../assets/world.svg";
-import PrivacySVG_0 from "./../../assets/privacy-world.svg";
-import PrivacySVG_1 from "./../../assets/privacy-following.svg";
-import PrivacySVG_2 from "./../../assets/privacy-mentioned.svg";
+import WorlSVG from "./../../../assets/world.svg";
+import PrivacySVG_0 from "./../../../assets/privacy-world.svg";
+import PrivacySVG_1 from "./../../../assets/privacy-following.svg";
+import PrivacySVG_2 from "./../../../assets/privacy-mentioned.svg";
 
 import "./Styles.css";
 
