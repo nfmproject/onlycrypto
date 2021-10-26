@@ -56,6 +56,9 @@ function SignUp({ ...props }: any) {
 
             createUser(payload).then((response) => {
               if (response.ok) history.push('/');
+              else if (response.status == 409) {
+                login();
+              }
             });
           });
         })
@@ -70,6 +73,9 @@ function SignUp({ ...props }: any) {
     ceramic.authenticate().then(() => {
       getUsername({ requested_did: localStorage.getItem('user_did') }).then((response) => {
         if (response.ok) {
+          response.json().then((val) => {
+            localStorage.setItem('username', val[0].username);
+          });
           history.push('/');
         }
       });

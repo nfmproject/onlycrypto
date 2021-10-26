@@ -3,6 +3,18 @@ import urlcat from 'urlcat';
 
 const serverEndpoint = 'http://localhost:5000';
 
+export const getPosts = async () => {
+  const response = await fetch(urlcat(serverEndpoint, 'fetch/allPosts'), {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const t = await response.json();
+  console.log(t);
+  return t;
+};
+
 export const getUsername = async (data: unknown) => {
   const response = await fetch(urlcat(serverEndpoint, 'profile/user'), {
     method: 'POST',

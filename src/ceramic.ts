@@ -159,8 +159,8 @@ export default function CeramicAuth() {
   const readData = async (streamId: string) => {
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.load(ceramic, streamId);
-      console.log(doc.content);
-      return doc.content;
+      if (doc.content) return JSON.stringify(doc.content);
+      else return 'error';
     } else {
       console.log('no ceramic did or busy');
       return 'error';
