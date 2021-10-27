@@ -11,7 +11,7 @@ import Web3 from 'web3';
 import { useRecoilState } from 'recoil';
 import { AuthStatus, basicAuthState } from './state/authStates';
 import { TileDocument } from '@ceramicnetwork/stream-tile';
-import { ceramicState, CeramicStatus } from './state/CeramicStates';
+import { ceramicState } from './state/CeramicStates';
 
 const ceramic = new CeramicClient('https://ceramic-clay.3boxlabs.com');
 
@@ -157,14 +157,12 @@ export default function CeramicAuth() {
    * @returns Content
    */
   const readData = async (streamId: string) => {
-    if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.load(ceramic, streamId);
-      if (doc.content) return JSON.stringify(doc.content);
+      if (doc.content){
+		  console.log(doc.content)
+		  return JSON.stringify(doc.content);
+	  }
       else return 'error';
-    } else {
-      console.log('no ceramic did or busy');
-      return 'error';
-    }
   };
 
   /**
