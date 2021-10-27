@@ -5,68 +5,65 @@ import KeyDidResolver from 'key-did-resolver';
 import ThreeIdResolver from '@ceramicnetwork/3id-did-resolver';
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import Fortmatic from "fortmatic";
-import Torus from "@toruslabs/torus-embed";
-import Web3 from "web3";
+import Fortmatic from 'fortmatic';
+import Torus from '@toruslabs/torus-embed';
+import Web3 from 'web3';
 import { useRecoilState } from 'recoil';
 import { AuthStatus, basicAuthState } from './state/authStates';
 import { TileDocument } from '@ceramicnetwork/stream-tile';
-import { ceramicState, CeramicStatus } from './state/CeramicStates';
+import { ceramicState } from './state/CeramicStates';
 
 const ceramic = new CeramicClient('https://ceramic-clay.3boxlabs.com');
 
 // TODO : Ceramic breaks without persmissions, wrap into try catch
 export interface CeramicType {
-  authenticate: () => Promise<void>;
+  authenticate: () => Promise<boolean>;
   resetDid: () => Promise<void>;
-  createData: (
-    data: object,
-    schema?: string | undefined,
-  ) => Promise<TileDocument<object> | 'error'>;
+  createData: (data: object, schema?: string | undefined) => Promise<string>;
   readData: (streamId: string) => Promise<any>;
   updateData: (streamId: string, data: object) => Promise<any>;
   createJWS: (payload: string) => Promise<object>;
   authState: AuthStatus;
-  logoutOfWeb3Modal: () => Promise<void>
+  logoutOfWeb3Modal: () => Promise<void>;
 }
 
 /*
    Web3 modal helps us "connect" external wallets:
  */
-   const web3Modal = new Web3Modal({
-    network: "mainnet", // optional
-    cacheProvider: true, // optional
-    providerOptions: {
-      walletconnect: {
-        package: WalletConnectProvider, // required
-        options: {
-          infuraId: "19b2294ebe0247a5a7beb92164520320", // nft-market infura id
-        },
-      },
-      fortmatic: {
-        package: Fortmatic,
-        options: {
-          // Mikko's TESTNET api key
-          key: "pk_test_391E26A3B43A3350"
-        }
-      },
-      torus: {
-        package: Torus
+const web3Modal = new Web3Modal({
+  network: 'mainnet', // optional
+  cacheProvider: true, // optional
+  providerOptions: {
+    walletconnect: {
+      package: WalletConnectProvider, // required
+      options: {
+        infuraId: '19b2294ebe0247a5a7beb92164520320', // nft-market infura id
       },
     },
-  });
+    fortmatic: {
+      package: Fortmatic,
+      options: {
+        // Mikko's TESTNET api key
+        key: 'pk_test_391E26A3B43A3350',
+      },
+    },
+    torus: {
+      package: Torus,
+    },
+  },
+});
 
 export default function CeramicAuth() {
   const [authState, setAuthState] = useRecoilState(basicAuthState);
   const [getCeramicState, setCeramicState] = useRecoilState(ceramicState);
 
   /**
-  * Logout for web3
-  */
+   * Logout for web3
+   */
   const logoutOfWeb3Modal = async () => {
     await web3Modal.clearCachedProvider();
-    localStorage.clear()
-    setAuthState(AuthStatus.PENDING)
+    localStorage.clear();
+    setAuthState(AuthStatus.PENDING);
     setTimeout(() => {
       window.location.reload();
     }, 1);
@@ -81,16 +78,16 @@ export default function CeramicAuth() {
       case AuthStatus.SOFT:
       case AuthStatus.PENDING:
         setAuthState(AuthStatus.LOADING);
-        
+
         const web3modalProvider = await web3Modal.connect();
         const web3 = new Web3(web3modalProvider);
 
-        const threeIdConnect = new ThreeIdConnect()
+        const threeIdConnect = new ThreeIdConnect();
         const temp = new Web3(web3.currentProvider);
-        const addresses = await temp.eth.getAccounts()
-        const authProvider = new EthereumAuthProvider(web3.currentProvider, addresses[0])
-        await threeIdConnect.connect(authProvider)
-        const provider = await threeIdConnect.getDidProvider()
+        const addresses = await temp.eth.getAccounts();
+        const authProvider = new EthereumAuthProvider(web3.currentProvider, addresses[0]);
+        await threeIdConnect.connect(authProvider);
+        const provider = await threeIdConnect.getDidProvider();
 
         const resolver = {
           ...KeyDidResolver.getResolver(),
@@ -100,26 +97,27 @@ export default function CeramicAuth() {
         ceramic.did = did;
 
         ceramic.did.setProvider(provider);
-        ceramic.did
-          .authenticate()
-          .then((res) => {
-            localStorage.setItem('user_did', ceramic.did?.id || '')
+        const authed = await ceramic.did.authenticate();
+
+        if (!!authed) {
+          if (ceramic.did.authenticated) {
+            localStorage.setItem('user_did', ceramic.did?.id || '');
             setAuthState(AuthStatus.AUTHENTICATED);
-          })
-          .catch(() => {
+          } else {
             alert('AuthFailed!!!');
             setAuthState(AuthStatus.FAILED);
-          });
-        return;
+          }
+        }
+        return ceramic.did.authenticated;
       case AuthStatus.LOADING:
         // TODO : modal to keep
         alert('please wait!!!');
-        return;
+        return false;
       case AuthStatus.AUTHENTICATED:
         alert('Already been authenticated 🎉 ');
-        return;
+        return false;
       default:
-        return;
+        return false;
     }
   };
   /**
@@ -134,7 +132,6 @@ export default function CeramicAuth() {
    * @returns document id
    */
   const createData = async (data: object, schema?: string, tagsData?: Array<string>) => {
-    console.log(ceramic.did?.id);
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.create(
         ceramic,
@@ -148,7 +145,7 @@ export default function CeramicAuth() {
         { pin: true },
       );
       console.log(doc.id.toString());
-      return doc;
+      return doc.id.toString();
     } else {
       console.log('no ceramic did or busy');
       return 'error';
@@ -160,14 +157,12 @@ export default function CeramicAuth() {
    * @returns Content
    */
   const readData = async (streamId: string) => {
-    if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.load(ceramic, streamId);
-      console.log(doc.content);
-      return doc.content;
-    } else {
-      console.log('no ceramic did or busy');
-      return 'error';
-    }
+      if (doc.content){
+		  console.log(doc.content)
+		  return JSON.stringify(doc.content);
+	  }
+      else return 'error';
   };
 
   /**

@@ -8,12 +8,8 @@ import { Router } from 'react-router-dom';
 import { Sidebar } from './components/Sidebar';
 
 import { AuthStatus, basicAuthState } from './state/authStates';
-import { Button } from '@mui/material';
-
-// import CeramicAuth from './ceramic';
 
 export default function App() {
-
   return (
     <Router history={history}>
       <RecoilRoot>
@@ -29,16 +25,16 @@ export default function App() {
 
 function AppContent() {
   const [authState, setAuthState] = useRecoilState(basicAuthState);
-  useEffect(()=>{
-    if(!!localStorage.getItem('user_did') && localStorage.getItem('user_did') != '') {
-     setAuthState(AuthStatus.SOFT) 
+  useEffect(() => {
+    if (!!localStorage.getItem('user_did') && localStorage.getItem('user_did') != '') {
+      setAuthState(AuthStatus.SOFT);
     }
-  },[])
+  }, []);
 
-  const render = history.location.pathname == '/signup'
+  const render = history.location.pathname == '/signup';
   return (
     <React.Fragment>
-      <Sidebar/>
+      <Sidebar /> 
       <RenderRoutes routes={RoutesConfig} />
       <Modals />
     </React.Fragment>
