@@ -1,10 +1,11 @@
 import { Button } from '@mui/material';
 import { Sidebar } from '../../components/Sidebar';
+import TweetBox from '../../components/PostBox/whatshappeningbar/TweetBox';
 
 function Home() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <TweetBox />
     </div>
   );
 }
