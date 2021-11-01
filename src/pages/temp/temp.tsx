@@ -5,8 +5,9 @@ import { profileType } from '../../ceramicFunctions/ceramicTypes';
 import CeramicAuth from '../../ceramic';
 import { profileCreate, profileUpdate } from '../../ceramicFunctions/createProfile';
 import { createPost, createUser, getUsername } from '../../serverApis';
+import { getKey } from '../../unlockProtocol/UnlockServices';
 
-function Temp({ ...props }: any) {
+function Temp() {
   const ceramic = CeramicAuth();
 
   function submitProfile() {
@@ -47,50 +48,68 @@ function Temp({ ...props }: any) {
     });
   }
 
-
   function registerUser() {
-    const signature = localStorage.getItem('did_signature')
-    const user_did = localStorage.getItem('user_did')
+    const signature = localStorage.getItem('did_signature');
+    const user_did = localStorage.getItem('user_did');
     if (!!signature) {
-
       const payload = {
         did: user_did,
         userName: 'iamzubin',
         ceramicHash: 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52',
-        did_sign: JSON.parse(signature)
-
-
-      }
-      createUser(payload)
+        did_sign: JSON.parse(signature),
+      };
+      createUser(payload);
     }
-
   }
 
   function fetchUser() {
-    const user_did = localStorage.getItem('user_did')
-    getUsername({ requested_did: user_did }).then((res) => res.json())
-    .then((res) => {
-      console.log(res[0].username)
-      console.log(res[0].ceramic_hash)
-    })
+    const user_did = localStorage.getItem('user_did');
+    getUsername({ requested_did: user_did })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res[0].username);
+        console.log(res[0].ceramic_hash);
+      });
   }
 
   function createPostCall() {
-    const user_did = localStorage.getItem('user_did')
-    const cearmic_payload = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52'
-    const signature = localStorage.getItem('did_signature')
-    if(!!user_did && !!signature){
-
+  //   {
+  //     "iv": "AiLnkQHPN/EJqsRYk23Zsg==",
+  //     "unlockLocks": [
+  //         {
+  //             "unlocklock": "0x9d0c5540cdd142ce68308a20a129bfb38d7b9f00",
+  //             "chainid": 4
+  //         }
+  //     ],
+  //     "post": "bd9sRROch9cOcLcOkniq1JAbYSpWonmigpnrKMBm"
+  // }
+    const user_did = localStorage.getItem('user_did');
+    const cearmic_payload = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
+    const signature = localStorage.getItem('did_signature');
+    if (!!user_did && !!signature) {
       const payload = {
-        did : user_did,
-        post_hash : cearmic_payload,
-        did_sign : JSON.parse(signature)
-      }
-      createPost(payload)
+        did: user_did,
+        post_hash: cearmic_payload,
+        did_sign: JSON.parse(signature),
+      };
+      createPost(payload);
     }
-
   }
 
+  function uploadUnlockKey() {
+    const postIV = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
+    getKey({ identifier: postIV });
+  }
+
+  function fetchUnlockKey() {
+    const postIV = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
+    const unlockKey = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
+    getKey({
+      identifier: postIV,
+      unlockKey: unlockKey,
+      unlockLocks: postIV,
+    });
+  }
 
   return (
     <div className={styles.main}>
@@ -103,6 +122,8 @@ function Temp({ ...props }: any) {
       <Button onClick={registerUser}>Upload Profile Supabase</Button>
       <Button onClick={fetchUser}>download Profile Supabase</Button>
       <Button onClick={createPostCall}>create Post</Button>
+      <Button onClick={fetchUnlockKey}>fetch Unlock Key</Button>
+      <Button onClick={uploadUnlockKey}>upload Unlock Key</Button>
     </div>
   );
 }

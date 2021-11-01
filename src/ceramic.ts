@@ -134,7 +134,6 @@ export default function CeramicAuth() {
    * @returns document id
    */
   const createData = async (data: object, schema?: string, tagsData?: Array<string>) => {
-    console.log(ceramic.did?.id);
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.create(
         ceramic,
@@ -150,8 +149,7 @@ export default function CeramicAuth() {
       console.log(doc.id.toString());
       return doc;
     } else {
-      console.log('no ceramic did or busy');
-      return 'error';
+      throw "error"
     }
   };
 

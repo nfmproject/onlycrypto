@@ -161,7 +161,10 @@ export const postUnlockData = async (myBody: string | object) => {
   });
   return response.status;
 };
-export const getKey = async (data: unknown) => {
+
+
+
+export const getKey = async (data: object) => {
   const response = await fetch(urlcat(keyServerEndpoint, 'request'), {
     method: 'POST',
     headers: {

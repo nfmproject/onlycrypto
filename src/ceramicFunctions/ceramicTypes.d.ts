@@ -1,3 +1,5 @@
+import { UnlockLock } from "../unlockProtocol/types";
+
 export interface profileType {
   username: string;
   firstName: string;
@@ -13,6 +15,6 @@ export interface postType {
   postText: string;
   encryptedText?: string;
   iv?: string; // needed for encryption
-  locks?: Array<string>;
+  locks?: Array<UnlockLock>;
   taggedUsers?: Array<string>;
 }
