@@ -5,7 +5,9 @@ import { profileType } from '../../ceramicFunctions/ceramicTypes';
 import CeramicAuth from '../../ceramic';
 import { profileCreate, profileUpdate } from '../../ceramicFunctions/createProfile';
 import { createPost, createUser, getUsername } from '../../serverApis';
-import { getKey } from '../../unlockProtocol/UnlockServices';
+import { getKey, postUnlockData } from '../../unlockProtocol/UnlockServices';
+import { createPostCall } from '../../posts/postfunctions';
+import { fetchKeyPayload } from '../../unlockProtocol/types';
 
 function Temp() {
   const ceramic = CeramicAuth();
@@ -23,7 +25,6 @@ function Temp() {
   }
 
   function fetchProfile() {
-    // @ts-ignore
     ceramic.readData('kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52');
   }
 
@@ -51,7 +52,7 @@ function Temp() {
   function registerUser() {
     const signature = localStorage.getItem('did_signature');
     const user_did = localStorage.getItem('user_did');
-    if (!!signature) {
+    if (!!signature && !!user_did) {
       const payload = {
         did: user_did,
         userName: 'iamzubin',
@@ -72,42 +73,34 @@ function Temp() {
       });
   }
 
-  function createPostCall() {
-  //   {
-  //     "iv": "AiLnkQHPN/EJqsRYk23Zsg==",
-  //     "unlockLocks": [
-  //         {
-  //             "unlocklock": "0x9d0c5540cdd142ce68308a20a129bfb38d7b9f00",
-  //             "chainid": 4
-  //         }
-  //     ],
-  //     "post": "bd9sRROch9cOcLcOkniq1JAbYSpWonmigpnrKMBm"
-  // }
-    const user_did = localStorage.getItem('user_did');
-    const cearmic_payload = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
-    const signature = localStorage.getItem('did_signature');
-    if (!!user_did && !!signature) {
-      const payload = {
-        did: user_did,
-        post_hash: cearmic_payload,
-        did_sign: JSON.parse(signature),
-      };
-      createPost(payload);
-    }
-  }
-
-  function uploadUnlockKey() {
-    const postIV = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
-    getKey({ identifier: postIV });
+  function createPost() {
+    createPostCall(ceramic, { data: "data" })
   }
 
   function fetchUnlockKey() {
-    const postIV = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
-    const unlockKey = 'kjzl6cwe1jw14aj2rhab093cndgjsalizmk3j4tvm1wct0lqmivkyyeztf2xr52';
-    getKey({
+    const data : fetchKeyPayload = {
+      identifier: 'taest1x',
+      chain: 4,
+      lock: "0x1fbbcbf0858ec308c77c41f4b52e0a60f1a7cb0e",
+      address : "0x3a574461fd1279fcf96043bcf416c53b7e8dcec0"
+
+    }
+    getKey(data).then((resp) => {
+      console.log(resp)
+    })
+
+  }
+
+  function uploadUnlockKey() {
+    const postIV = 'taest1x';
+    const unlockKey = 'fasdf';
+    postUnlockData({
       identifier: postIV,
       unlockKey: unlockKey,
-      unlockLocks: postIV,
+      unlockLocks: [{
+        chainid: 4,
+        unlocklock: "0x1fbbcbf0858ec308c77c41f4b52e0a60f1a7cb0e"
+      }],
     });
   }
 
@@ -121,7 +114,7 @@ function Temp() {
       <Button onClick={ceramicJWS}>Signature to LocalStorage</Button>
       <Button onClick={registerUser}>Upload Profile Supabase</Button>
       <Button onClick={fetchUser}>download Profile Supabase</Button>
-      <Button onClick={createPostCall}>create Post</Button>
+      <Button onClick={createPost}>create Post</Button>
       <Button onClick={fetchUnlockKey}>fetch Unlock Key</Button>
       <Button onClick={uploadUnlockKey}>upload Unlock Key</Button>
     </div>

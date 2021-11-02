@@ -7,7 +7,7 @@ export interface UnlockLock {
 export interface fetchKeyPayload {
     address: string,
     chain: number,
-    idenrifier: string,
+    identifier: string,
     lock: string
 }
 
@@ -18,4 +18,10 @@ export interface fetchKeyResponse {
         unlockLocks : [UnlockLock],
         unlockKey : string
     }
+}
+
+export interface postKeyRequest {
+        identifier : string,
+        unlockLocks : [UnlockLock],
+        unlockKey : string
 }

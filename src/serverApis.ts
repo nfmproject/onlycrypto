@@ -1,5 +1,6 @@
-import stringify from "json-stable-stringify";
+import stringify from "json-stringify-safe";
 import urlcat from "urlcat";
+import { databasePost, databaseUser } from "./serverTypes";
 
 
 const serverEndpoint = 'http://localhost:5000'
@@ -29,7 +30,8 @@ export const getUsername = async (data: unknown) => {
  * @returns 
  */
 
-export const createUser = async (data: unknown) => {
+export const createUser = async (data: databaseUser) => {
+    console.log(stringify(data))
     const response = await fetch(urlcat(serverEndpoint, 'profile/createUser'), {
         method: 'POST',
         headers: {
@@ -52,7 +54,7 @@ export const createUser = async (data: unknown) => {
 }
  * @returns 
  */
-export const createPost = async (data: unknown) => {
+export const createPost = async (data: databasePost) => {
     const response = await fetch(urlcat(serverEndpoint, 'profile/createPost'), {
         method: 'POST',
         headers: {

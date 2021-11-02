@@ -2,6 +2,7 @@ import { GraphQLClient, gql } from 'graphql-request';
 import stringify from 'json-stable-stringify';
 import urlcat from 'urlcat';
 import { graphEndpointKeyVal, keyServerEndpoint } from './constants';
+import { fetchKeyPayload, fetchKeyResponse, postKeyRequest } from './types';
 
 const graphQLClients: { [key: string]: GraphQLClient } = {};
 
@@ -151,7 +152,7 @@ export const getPurchasedLocks = async (_address: string) => {
   return dataRes;
 };
 
-export const postUnlockData = async (myBody: string | object) => {
+export const postUnlockData = async (myBody: postKeyRequest ) => {
   const response = await fetch(urlcat(keyServerEndpoint, 'add'), {
     method: 'POST',
     headers: {
@@ -164,7 +165,7 @@ export const postUnlockData = async (myBody: string | object) => {
 
 
 
-export const getKey = async (data: object) => {
+export const getKey = async (data: fetchKeyPayload) => {
   const response = await fetch(urlcat(keyServerEndpoint, 'request'), {
     method: 'POST',
     headers: {

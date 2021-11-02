@@ -22,7 +22,7 @@ export interface CeramicType {
   createData: (
     data: object,
     schema?: string | undefined,
-  ) => Promise<TileDocument<object> | 'error'>;
+  ) => Promise<string>;
   readData: (streamId: string) => Promise<any>;
   updateData: (streamId: string, data: object) => Promise<any>;
   createJWS: (payload: string) => Promise<object>;
@@ -147,8 +147,9 @@ export default function CeramicAuth() {
         { pin: true },
       );
       console.log(doc.id.toString());
-      return doc;
+      return doc.id.toString();
     } else {
+      // return "error"
       throw "error"
     }
   };
