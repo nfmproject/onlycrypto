@@ -22,7 +22,7 @@ export interface CeramicType {
   createData: (
     data: object,
     schema?: string | undefined,
-  ) => Promise<TileDocument<object> | 'error'>;
+  ) => Promise<string>;
   readData: (streamId: string) => Promise<any>;
   updateData: (streamId: string, data: object) => Promise<any>;
   createJWS: (payload: string) => Promise<object>;
@@ -134,7 +134,6 @@ export default function CeramicAuth() {
    * @returns document id
    */
   const createData = async (data: object, schema?: string, tagsData?: Array<string>) => {
-    console.log(ceramic.did?.id);
     if (!!ceramic.did?.id && getCeramicState != 'IDLE') {
       const doc = await TileDocument.create(
         ceramic,
@@ -148,10 +147,10 @@ export default function CeramicAuth() {
         { pin: true },
       );
       console.log(doc.id.toString());
-      return doc;
+      return doc.id.toString();
     } else {
-      console.log('no ceramic did or busy');
-      return 'error';
+      // return "error"
+      throw "error"
     }
   };
 

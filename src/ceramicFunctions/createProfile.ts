@@ -30,14 +30,3 @@ export const profileUpdate = (ceramic: CeramicType, streamID: string, profileDat
     });
 };
 
-export const postCreate = (ceramic: CeramicType, postData: postType) => {
-  ceramic
-    .createData(postData)
-    .then((res) => {
-      return res;
-    })
-    .catch((error) => {
-      console.error(error);
-      return;
-    });
-};
