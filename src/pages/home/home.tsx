@@ -1,11 +1,18 @@
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { Sidebar } from '../../components/Sidebar';
+import NewTweetForm from '../../components/PostBox/NewTweetForm';
+import Feed from '../../components/Feed';
 
 function Home() {
   return (
+    <>
     <div>
-      <h1>Hello World</h1>
+      <NewTweetForm newTweetInput={undefined} handleNewTweet={undefined} handleSubmit={undefined} />
     </div>
+    <div>
+      <Feed />
+    </div>
+    </>
   );
 }
 
