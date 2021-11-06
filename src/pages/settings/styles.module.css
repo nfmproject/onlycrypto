@@ -2,9 +2,19 @@
 
 .mainContent {
   flex: 0.2;
-  min-width: 220px;
+  min-width: 420px;
   @apply sticky;
-  @apply px-3;
-  @apply border-r border-outline;
   @apply cursor-pointer;
+}
+
+.header {
+  @apply text-text-primary w-full !important;
+  @apply text-xl font-bold;
+  @apply p-3;
+  @apply border-b border-outline;
+}
+
+.innerSettingOption {
+  @apply flex w-full items-center cursor-pointer py-3;
+  @apply hover:bg-background-hover hover:bg-opacity-10;
 }

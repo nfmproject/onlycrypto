@@ -1,0 +1,13 @@
+@import '../../App.css';
+
+.settingOptions {
+  @apply text-text-primary !important;
+  @apply p-3 flex flex-row justify-between items-center;
+  @apply transition-colors duration-100 ease-out;
+  @apply hover:bg-background-hover hover:bg-opacity-10;
+}
+
+.settingActive {
+  @apply bg-background-hover bg-opacity-10;
+  @apply border-r-2 border-button;
+}
